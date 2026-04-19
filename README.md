@@ -1,8 +1,6 @@
 # ai-engineering-skills
 
-Portable repository for the `ai-engineering` skill, packaged for the `skills.sh` ecosystem.
-
-Copy this folder out of the project, turn it into its own Git repository, and publish it to GitHub or another Git host. Other people can then install it with `npx skills add ...` and pull newer versions with `npx skills update`.
+Portable repository for the `ai-engineering` skill of [Felix Krause](https://www.f-krause.at/), packaged for the `skills.sh` ecosystem.
 
 ## Contents
 
@@ -30,13 +28,6 @@ ai-engineering-skills/
             └── workflows.md
 ```
 
-## What This Repo Is For
-
-- Maintain one shared `ai-engineering` skill outside any single application repo.
-- Version changes with normal Git tags and releases.
-- Let teammates install the skill into Codex, Claude Code, Cursor, OpenCode, and other supported agents.
-- Keep the skill content agent-focused while using this README for maintainer and consumer documentation.
-
 ## Local Validation
 
 Run these commands from the parent directory of this folder.
@@ -59,58 +50,36 @@ Install it globally for a specific agent:
 npx skills add ./ai-engineering-skills --skill ai-engineering -g -a codex
 ```
 
-## Turn This Into Its Own Repo
-
-Copy the folder somewhere outside this project, then initialize and publish it:
-
-```bash
-cp -R ai-engineering-skills ~/code/ai-engineering-skills
-cd ~/code/ai-engineering-skills
-git init
-git add .
-git commit -m "Initial ai-engineering skill package"
-git branch -M main
-git remote add origin git@github.com:YOUR_ORG/ai-engineering-skills.git
-git push -u origin main
-```
-
-If you prefer HTTPS:
-
-```bash
-git remote add origin https://github.com/YOUR_ORG/ai-engineering-skills.git
-git push -u origin main
-```
-
 ## How Others Install It
 
 Install from GitHub shorthand:
 
 ```bash
-npx skills add YOUR_ORG/ai-engineering-skills --skill ai-engineering
+npx skills add f-krause/ai-engineering-skills --skill ai-engineering
 ```
 
 Install from a full GitHub URL:
 
 ```bash
-npx skills add https://github.com/YOUR_ORG/ai-engineering-skills --skill ai-engineering
+npx skills add https://github.com/f-krause/ai-engineering-skills --skill ai-engineering
 ```
 
 Install for a specific agent only:
 
 ```bash
-npx skills add YOUR_ORG/ai-engineering-skills --skill ai-engineering -a codex
+npx skills add f-krause/ai-engineering-skills --skill ai-engineering -a codex
 ```
 
 Install globally instead of per-project:
 
 ```bash
-npx skills add YOUR_ORG/ai-engineering-skills --skill ai-engineering -g
+npx skills add f-krause/ai-engineering-skills --skill ai-engineering -g
 ```
 
 List the skills available in the repo before installing:
 
 ```bash
-npx skills add YOUR_ORG/ai-engineering-skills --list
+npx skills add f-krause/ai-engineering-skills --list
 ```
 
 ## How Others Update It
@@ -176,9 +145,6 @@ Recommended interpretation:
 - Minor: new subskills, new workflows, expanded coverage
 - Patch: typo fixes, clarifications, small corrections
 
-## Private Team Distribution
-
-If the skill contains internal conventions, prompts, or security guidance, keep this repository private and give teammates access to the repo. The `skills` CLI supports installing from Git repositories, so private distribution can still use the same structure and workflow as public distribution.
 
 ## Notes
 
