@@ -48,6 +48,8 @@ Use when the overall workflow is still code-owned, but a coordinator model needs
 
 Use when generation quality improves through an explicit critique-and-revise loop with clear evaluation criteria.
 
+This is often the highest-leverage pattern for B2B tasks that must be accurate, auditable, and cheap enough to run at scale. A verifier or critic step usually beats giving a single agent more autonomy.
+
 ## Rules
 
 1. Keep control flow explicit in code. The LLM should not invent new loop structure in a workflow.
@@ -56,6 +58,19 @@ Use when generation quality improves through an explicit critique-and-revise loo
 4. Keep prompts specialized per step rather than one overloaded mega-prompt.
 5. Bound retries and refinement loops. Every workflow must have a deterministic exit path.
 6. Pass only the minimum context needed for each step.
+7. Prefer verifier stages over open-ended self-reflection. A bounded critique with explicit pass or fail criteria is easier to test.
+8. When a step fails repeatedly, escalate or fail closed instead of looping until the budget is gone.
+
+## Verification Pattern
+
+For business workflows, use an explicit checker when the output will drive code, money, compliance, or user-visible action:
+
+1. produce a draft or candidate action
+2. run deterministic checks where possible
+3. run an evaluator or critic only for what code cannot verify
+4. accept, revise with bounded retries, or escalate
+
+This keeps most of the system verifiable without turning everything into a free-form agent loop.
 
 ## Code Shape Examples
 
@@ -106,6 +121,7 @@ This is still a workflow even though it loops once, because code owns the loop a
 
 - If the project uses a framework-specific AI SDK or orchestration wrapper, read the corresponding local companion skill or docs as well.
 - For step contracts and handoff objects, also read `subskills/schema-design.md`.
+- For retrieval-heavy steps, also read `subskills/retrieval.md`.
 - If workflow behavior changes, run the project's AI-focused regression tests if they exist.
 
 ## Sources
@@ -114,3 +130,4 @@ This is still a workflow even though it loops once, because code owns the loop a
 - https://www.anthropic.com/engineering/building-effective-agents (last accessed 17.04.2026)
 - https://abdullin.com/schema-guided-reasoning/adaptive-planning (last accessed 17.04.2026)
 - https://ai-sdk.dev/docs/foundations/tools (last accessed 17.04.2026)
+- https://research.google/blog/ds-star-a-state-of-the-art-versatile-data-science-agent/ (last accessed 19.04.2026)

@@ -12,6 +12,8 @@ Design the schema before the prompt. The schema is the contract between the mode
 6. Version persisted or cross-service schemas. If an old response can still exist, plan migration or compatibility logic.
 7. Validate twice: schema-level validation at parse time and app-level invariants before using the result.
 8. Never let the model supply security-critical context such as tenant IDs, auth scope, or hidden tool parameters. Inject those server-side.
+9. Include evidence or citation fields whenever the output must be auditable against source material.
+10. Encode stop reasons, approval states, and route choices as enums instead of free-form text.
 
 ## Schema-Guided Reasoning Patterns
 
@@ -81,6 +83,44 @@ class NextAction(BaseModel):
 
 This mirrors SGR routing: first explain the step, then choose one branch.
 
+### Python: extracted evidence versus resolved citation
+
+```python
+from typing import Literal
+
+from pydantic import BaseModel, Field
+
+
+class ExtractedEvidence(BaseModel):
+    source_id: str = Field(description="Source selected by the model")
+    quote: str = Field(description="Minimal supporting verbatim text")
+    page_marker: str | None = Field(
+        description="Machine-readable physical page marker if available"
+    )
+    support_type: Literal["direct", "derived"] = Field(
+        description="Whether the quote directly states the claim"
+    )
+
+
+class ResolvedCitation(BaseModel):
+    source_id: str = Field(description="Resolved source identifier")
+    quote: str = Field(description="Quote resolved from source text")
+    page_start: int | None = Field(description="Start page if page-based")
+    page_end: int | None = Field(description="End page if page-based")  # as needed
+    char_start: int | None = Field(description="Start character offset")  # as needed
+    char_end: int | None = Field(description="End character offset")  # as needed
+    block_id: str | None = Field(description="Stable parser block identifier")  # as needed
+    resolver_confidence: float = Field(description="0 to 1 resolution confidence")
+```
+
+Why this shape works:
+
+- `ExtractedEvidence` is model-produced semantic support
+- `page_marker` gives the resolver a model-facing page prior without asking the model for offsets
+- `ResolvedCitation` is code-produced provenance
+- the split makes it obvious that page numbers and offsets do not come from the model
+- resolver confidence gives the app a clean way to abstain or degrade gracefully
+
 ### TypeScript: Zod schema with enums, ints, optional fields
 
 ```ts
@@ -130,6 +170,43 @@ export const nextActionSchema = z.object({
 
 Use discriminated unions when the model must choose one explicit branch before emitting branch-specific payload.
 
+### TypeScript: extracted evidence versus resolved citation
+
+```ts
+import { z } from "zod";
+
+export const extractedEvidenceSchema = z.object({
+  sourceId: z.string().describe("Source selected by the model"),
+  quote: z.string().describe("Minimal supporting verbatim text"),
+  pageMarker: z
+    .string()
+    .optional()
+    .describe("Machine-readable physical page marker if available"),
+  supportType: z
+    .enum(["direct", "derived"])
+    .describe("Whether the quote directly states the claim"),
+});
+
+export const resolvedCitationSchema = z.object({
+  sourceId: z.string().describe("Resolved source identifier"),
+  quote: z.string().describe("Quote resolved from source text"),
+  pageStart: z.number().int().optional().describe("Start page if page-based"),
+  pageEnd: z.number().int().optional().describe("End page if page-based"),  // as needed
+  charStart: z.number().int().optional().describe("Start character offset"),  // as needed
+  charEnd: z.number().int().optional().describe("End character offset"),  // as needed
+  blockId: z.string().optional().describe("Stable parser block identifier"),  // as needed
+  resolverConfidence: z
+    .number()
+    .min(0)
+    .max(1)
+    .describe("0 to 1 resolution confidence"),
+});
+```
+
+Use this split whenever a grounded answer must be auditable against a source document.
+
+When you use page markers such as `@@page_14@@`, keep them in the model-produced evidence object and parse the physical page number in code during resolution.
+
 ## TypeScript and Python
 
 - TypeScript: prefer Zod for tool inputs, structured outputs, and UI-facing message types
@@ -144,6 +221,11 @@ Use discriminated unions when the model must choose one explicit branch before e
 4. Keep tool outputs compact. Return identifiers or summaries, not giant payload dumps.
 5. If downstream code branches on tool output, model that output with a schema too.
 6. Keep per-field descriptions brief. If a field needs a paragraph to explain, the schema is carrying prompt logic that should live in the system prompt instead.
+7. Prefer discriminated unions or literal action fields when the model must choose one tool or one next action.
+8. If a tool can preview and commit, model those as separate actions or explicit modes rather than relying on prose.
+9. When an agent is budgeted, expose budget-relevant fields like remaining steps or stop reason explicitly instead of hiding them in free text.
+10. When outputs need citations, separate model-produced evidence objects from code-produced resolved citation objects.
+11. If page markers are used for citation resolution, model the marker as a dedicated field instead of burying it inside the quote text.
 
 ### Description anti-pattern
 
@@ -163,11 +245,24 @@ reasoning: str = Field(description="Short reasoning")
 
 Put the long instructions in the system prompt, where they apply consistently across the whole response.
 
+## Citation Pattern
+
+For grounded answers over documents, prefer this contract shape:
+
+1. `ExtractedEvidence`: semantic support produced by the model
+2. `ResolvedCitation`: exact provenance produced by code or the document layer
+3. final answer object: answer plus one or more `ResolvedCitation` items
+
+This split prevents a common failure mode where the model emits plausible-looking page numbers or offsets that were never verified against the source.
+
+If the system uses page markers, put the marker on `ExtractedEvidence` and keep `ResolvedCitation.page_start` or equivalent as the verified physical page produced by code. Do not treat the page marker itself as final provenance.
+
 ## Failure Handling
 
 - If parsing fails, either retry with the validation errors or fail closed based on the risk of the action.
 - Add regression tests whenever a schema update changes accepted values, field order, or downstream branching behavior.
 - Run the project's AI-focused regression tests for changes that affect prompts, tools, or structured outputs.
+- If grounded answers require citations, fail validation when citations are missing or malformed rather than silently accepting an ungrounded answer.
 
 ## Sources
 

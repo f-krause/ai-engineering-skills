@@ -35,7 +35,9 @@ ai-engineering-skills/
             │   ├── gemini.md
             │   ├── mistral.md
             │   └── openai.md
+            ├── citations.md
             ├── llm-calls.md
+            ├── retrieval.md
             ├── safety-evals.md
             ├── schema-design.md
             ├── tracing.md

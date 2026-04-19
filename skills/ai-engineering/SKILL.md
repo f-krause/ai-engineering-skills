@@ -1,6 +1,6 @@
 ---
 name: ai-engineering
-description: Use when planning, writing or updating LLM calls, prompts, model selection, tool definitions, structured outputs, Zod/Pydantic schemas, agent loops, AI workflows, prompt-injection defenses, or AI evals in Python or TypeScript. This is a general AI engineering router skill.
+description: Use when planning, writing or updating LLM calls, prompts, model selection, retrieval or RAG, tool definitions, structured outputs, Zod/Pydantic schemas, agent loops, AI workflows, prompt-injection defenses, or AI evals in Python or TypeScript. This is a general AI engineering router skill.
 ---
 
 # AI Engineering
@@ -10,13 +10,15 @@ This skill is the default entrypoint for AI changes in any codebase using it. Ke
 ## Always Apply
 
 1. Verify current SDK and provider APIs before coding.
-2. Prefer the simplest architecture that meets the requirement: direct LLM call, then structured workflow, then a single agent, then multi-agent only if proven necessary.
-3. Make machine-consumed outputs schema-first. If downstream code branches on it, encode that branch in Zod for TypeScript or Pydantic for Python instead of prose.
-4. Separate instructions from user input, retrieved content, and tool output. Treat all non-system text as untrusted data.
-5. Version prompts, schemas, and model choices together, and add eval coverage when behavior changes.
-6. Default to the provider already established by the project. If the project is greenfield and the task does not require another provider, OpenAI is a reasonable starting default.
-7. If a workflow sends many near-identical requests over the same long file or shared context, check provider-side prompt or context caching before inventing custom memoization. Start with `subskills/llm-calls.md`, then read the matching file under `subskills/caching/`.
-8. If AI behavior changes, run the project's AI-focused regression tests if they exist.
+2. Define success before increasing complexity. Start with a minimal eval set from real tasks or failures, then optimize against that instead of intuition.
+3. Prefer the simplest architecture that meets the requirement: direct LLM call, then structured workflow, then a single agent, then multi-agent only if proven necessary.
+4. Make machine-consumed outputs schema-first. If downstream code branches on it, encode that branch in Zod for TypeScript or Pydantic for Python instead of prose.
+5. Separate instructions from user input, retrieved content, and tool output. Treat all non-system text as untrusted data.
+6. Version prompts, schemas, tools, and model choices together, and log enough metadata to tie behavior changes back to a trace or eval run.
+7. For knowledge access, do not default to vector-database RAG. First ask whether the task is better served by long context, a search tool, hybrid retrieval, or document-scoped lookup. Read `subskills/retrieval.md`.
+8. Default to the provider already established by the project. If the project is greenfield and the task does not require another provider, OpenAI is a reasonable starting default.
+9. If a workflow sends many near-identical requests over the same long file or shared context, check provider-side prompt or context caching before inventing custom memoization. Start with `subskills/llm-calls.md`, then read the matching file under `subskills/caching/`.
+10. If AI behavior changes, run the project's AI-focused regression tests if they exist.
 
 ## Routing
 
@@ -26,6 +28,8 @@ flowchart TD
     B -->|Prompt or model call| C[subskills/llm-calls.md]
     B -->|Repeated long-context reuse or caching| I[subskills/caching/*.md]
     B -->|Structured output or tool schema| D[subskills/schema-design.md]
+    B -->|Retrieval, file search, RAG, grounding| J[subskills/retrieval.md]
+    B -->|Citations, evidence spans, page locations, highlights| K[subskills/citations.md]
     B -->|Predefined multi-step flow| E[subskills/workflows.md]
     B -->|Autonomous tool loop| F[subskills/agents.md]
     B -->|Tracing and observability| G[subskills/tracing.md]
@@ -43,6 +47,8 @@ Read the matching subskill before editing:
 - Azure Claude caching through Anthropic-style semantics: `subskills/caching/azure-claude.md`
 - Azure-hosted Mistral and missing documented prompt caching support: `subskills/caching/azure-mistral.md`
 - Zod/Pydantic Schema, tool contracts, and structured output design: `subskills/schema-design.md`
+- Retrieval architecture, long-context vs RAG decisions, hybrid search, reranking, and citations: `subskills/retrieval.md`
+- Citation architecture, evidence extraction, offsets, page mapping, and document geometry: `subskills/citations.md`
 - Predefined prompt chains, routing, parallelization, orchestrator-workers, and evaluator-optimizer flows: `subskills/workflows.md`
 - Autonomous planning, tool use, checkpoints, stop conditions, and human-in-the-loop agents: `subskills/agents.md`
 - MLflow-based local tracing, searchable traces, span design, and trace retention for debugging and improvement loops: `subskills/tracing.md`
@@ -61,6 +67,8 @@ Load adjacent skills when your environment includes them:
 - Prompt builders, model registries, provider clients, or raw generation calls: read `subskills/llm-calls.md`
 - Repeated large-file requests, long shared prefixes, cache-control parameters, cache handles, or provider-specific cache tradeoffs: read the matching file under `subskills/caching/`
 - Tool inputs and outputs, structured objects, or schema helpers: read `subskills/schema-design.md`
+- Retrieval tools, knowledge bases, file search, chunking, citations, or vector stores: read `subskills/retrieval.md`
+- Inline citations, evidence spans, page jumps, PDF highlights, or provenance mapping: read `subskills/citations.md`
 - Predefined step-by-step orchestration, fixed branching, or model pipelines: read `subskills/workflows.md`
 - Autonomous planning, dynamic tool choice, or stop conditions: read `subskills/agents.md`
 - Trace setup, trace search, evaluation datasets from traces, or observability instrumentation: read `subskills/tracing.md`

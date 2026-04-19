@@ -6,7 +6,11 @@ The format is intentionally simple and can be maintained by hand.
 
 ## [Unreleased]
 
-- Initial export scaffold created from the in-project `ai-engineering` skill bundle.
+- Added a dedicated `citations.md` subskill for structured provenance, evidence extraction, exact text matching, page mapping, and layout-grounded highlights.
+- Added a new `retrieval.md` subskill covering long-context vs search vs hybrid RAG decisions, chunking, reranking, and grounded answer design.
+- Strengthened `agents.md` with budgeted loop guidance, explicit stop reasons, tool-design rules, context management, and multi-agent cautions.
+- Expanded `safety-evals.md` into a fuller eval flywheel with real-trace datasets, capability vs regression suites, transcript and outcome grading, and efficiency metrics.
+- Tightened `workflows.md` and `schema-design.md` around verifier stages, auditable outputs, and structured control fields.
 
 ## [0.1.0] - 2026-04-19
 
