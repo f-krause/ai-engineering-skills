@@ -15,6 +15,8 @@ Choose retrieval architecture in this order:
 
 Long context plus provider caching is often simpler and more reliable than RAG for small or medium corpora. RAG earns its complexity only when scale or latency require it.
 
+This subskill is about finding and preparing evidence. If the change is mainly about mapping answers back to exact evidence locations, read `subskills/citations.md`. If the change is mainly about trust, review routing, or abstention based on evidence quality, read `subskills/confidence.md`.
+
 ## Architecture Rules
 
 1. Evaluate retrieval separately from generation. If the retriever misses the evidence, prompt tuning the answer step will not fix the system.
@@ -54,7 +56,8 @@ Prefer answer schemas like:
 
 - `answer`
 - `citations`
-- `confidence` or `answer_status`
+- `confidence_bucket` or `answer_status`
+- `disposition`
 - `missing_information` when the evidence is incomplete
 
 This keeps grounded answering auditable in B2B systems.

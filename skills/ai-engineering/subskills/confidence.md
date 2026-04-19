@@ -2,6 +2,8 @@
 
 Use this subskill when adding or changing confidence buckets, abstention behavior, review routing, contradiction checks, source weighting, or verifier logic for grounded AI workflows.
 
+This subskill is about trust and decisions under uncertainty. If the main issue is how evidence is found, read `subskills/retrieval.md`. If the main issue is how evidence locations or highlights are resolved, read `subskills/citations.md`. If the main issue is only the output contract, read `subskills/schema-design.md`.
+
 ## Core Position
 
 Do not treat model confidence as introspection you can trust directly.
@@ -39,6 +41,8 @@ Good `disposition` values:
 - `abstain`
 
 `review` is not the same as low confidence. A workflow can send something to human review because it is high impact, contradictory, or policy-sensitive even when the model found strong evidence.
+
+Default to categories for online use. Only add numeric probabilities if they come from an offline calibration layer or another explicit empirical mapping.
 
 ## Field Order
 
@@ -235,6 +239,8 @@ A strong low-token runtime contract often looks like:
 
 `reason_codes` should be short literals, not paragraphs.
 
+Only include `reason_codes` when the application or trace consumer actually uses them. If they are not consumed, drop them to save output tokens.
+
 ## Audit Schema Pattern
 
 Use a richer schema offline or on flagged cases:
@@ -282,6 +288,7 @@ If the buckets do not separate empirically, the rubric is weak.
 
 ## Project Notes
 
+- For grounded evidence retrieval, also read `subskills/retrieval.md`.
 - For grounded evidence, citations, and provenance, also read `subskills/citations.md`.
 - For schema design and enum-heavy contracts, also read `subskills/schema-design.md`.
 - For eval design and human-review calibration, also read `subskills/safety-evals.md`.

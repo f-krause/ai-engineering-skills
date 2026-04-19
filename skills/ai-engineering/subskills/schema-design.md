@@ -28,7 +28,7 @@ These patterns are useful when the model must not skip intermediate checks, must
 
 The order of fields is part of the control surface. If you want the model to reason before answering, place reasoning fields before the final answer field. If you want explicit tool routing before arguments, place the route discriminator before the tool payload.
 
-One practical detail from Anthropic's structured output docs: output ordering is not always a naive copy of schema property order. Required properties are emitted before optional properties, each in schema order. If property order matters to your application or prompt design, either keep the relevant fields required or account for provider reordering in your parser and tests.
+One practical detail from Anthropic's structured output docs: output ordering is not always a naive copy of schema property order. Required properties are emitted before optional properties, each in schema order. If order matters to your application or prompt design, either keep the relevant fields required or account for provider reordering in your parser and tests.
 
 ## Examples
 
@@ -111,10 +111,10 @@ class ResolvedCitation(BaseModel):
     source_id: str = Field(description="Resolved source identifier")
     quote: str = Field(description="Quote resolved from source text")
     page_start: int | None = Field(description="Start page if page-based")
-    page_end: int | None = Field(description="End page if page-based")  # as needed
-    char_start: int | None = Field(description="Start character offset")  # as needed
-    char_end: int | None = Field(description="End character offset")  # as needed
-    block_id: str | None = Field(description="Stable parser block identifier")  # as needed
+    page_end: int | None = Field(description="End page if page-based")
+    char_start: int | None = Field(description="Start character offset")
+    char_end: int | None = Field(description="End character offset")
+    block_id: str | None = Field(description="Stable parser block identifier")
     resolver_confidence: float = Field(description="0 to 1 resolution confidence")
 ```
 
@@ -134,7 +134,6 @@ import { z } from "zod";
 export const analysisResultSchema = z.object({
   evidence: z.array(z.string()).min(1).max(3).describe("Key facts"),
   reasoning: z.string().describe("Short reasoning"),
-  escalationReason: z.string().optional().describe("Only if needed"),
   finalAnswer: z
     .enum(["approve", "reject", "needs_review"])
     .describe("Decision"),
@@ -148,7 +147,7 @@ Why this shape works:
 
 - `z.enum(...)` is better than a free string when code branches on the result
 - a small confidence enum is usually more stable than a raw decimal or ordinal score
-- `.optional()` is useful for conditional details, but do not make core decision fields optional
+- use optional fields only for genuinely conditional details, not for core decision outputs
 - the order still matters: reasoning appears before `finalAnswer`, and `confidenceBucket` comes after it as a summary judgment
 
 ### TypeScript: routed tool schema
@@ -198,10 +197,10 @@ export const resolvedCitationSchema = z.object({
   sourceId: z.string().describe("Resolved source identifier"),
   quote: z.string().describe("Quote resolved from source text"),
   pageStart: z.number().int().optional().describe("Start page if page-based"),
-  pageEnd: z.number().int().optional().describe("End page if page-based"),  // as needed
-  charStart: z.number().int().optional().describe("Start character offset"),  // as needed
-  charEnd: z.number().int().optional().describe("End character offset"),  // as needed
-  blockId: z.string().optional().describe("Stable parser block identifier"),  // as needed
+  pageEnd: z.number().int().optional().describe("End page if page-based"),
+  charStart: z.number().int().optional().describe("Start character offset"),
+  charEnd: z.number().int().optional().describe("End character offset"),
+  blockId: z.string().optional().describe("Stable parser block identifier"),
   resolverConfidence: z
     .number()
     .min(0)
@@ -219,6 +218,7 @@ When you use page markers such as `@@page_14@@`, keep them in the model-produced
 - TypeScript: prefer Zod for tool inputs, structured outputs, and UI-facing message types
 - Python: prefer Pydantic models with `Annotated` constraints instead of deprecated helper types
 - Both: keep field names explicit, stable, and short enough for humans to inspect in logs and evals
+- If the task is mainly about retrieval, provenance, or confidence policy rather than the object contract itself, read the matching neighboring subskill and use this file only for the schema layer
 
 ## Tool Schema Rules
 

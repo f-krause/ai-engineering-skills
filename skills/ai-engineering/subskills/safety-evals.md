@@ -102,6 +102,7 @@ For important launches, sample failing and passing traces for human review. Auto
 - If AI prompts, tools, or routing behavior changed, run the project's AI-focused regression tests if they exist.
 - For changes in model invocation shape, also read `subskills/llm-calls.md`.
 - For tool permissions and planner safety, also read `subskills/agents.md`.
+- For grounded retrieval or provenance changes, also read `subskills/retrieval.md` and `subskills/citations.md`.
 - For criteria-based confidence, abstention, and review routing, also read `subskills/confidence.md`.
 - For real-execution telemetry and turning traces into eval datasets, also read `subskills/tracing.md`.
 

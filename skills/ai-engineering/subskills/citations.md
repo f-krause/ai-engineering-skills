@@ -2,6 +2,8 @@
 
 Use this subskill when adding or changing inline citations, evidence spans, quoted support, page jumps, PDF highlights, offsets, bounding boxes, or provenance metadata for grounded answers.
 
+This subskill is about provenance after evidence has already been found. If the main issue is how to retrieve the right evidence, start with `subskills/retrieval.md`. If the main issue is how citations should affect confidence or review routing, also read `subskills/confidence.md`.
+
 ## Default Architecture
 
 Use a two-stage citation pipeline:
@@ -50,7 +52,6 @@ Use the model for semantic selection, then use code for exact localization.
 
 Ask the model for:
 
-- answer or decision
 - supporting evidence quotes or minimal evidence spans
 - source identifiers
 - page markers when available
@@ -269,6 +270,7 @@ Add hard cases for:
 ## Project Notes
 
 - For retrieval architecture, chunking, and grounded answer generation, also read `subskills/retrieval.md`.
+- For trust, contradiction handling, or review routing that depends on provenance quality, also read `subskills/confidence.md`.
 - For schema contracts and structured citation objects, also read `subskills/schema-design.md`.
 - For audits, failure analysis, and citation eval datasets from traces, also read `subskills/tracing.md` and `subskills/safety-evals.md`.
 
