@@ -46,7 +46,7 @@ Default to categories for online use. Only add numeric probabilities if they com
 
 ## Field Order
 
-Field order matters.
+Field order matters. The detailed contract guidance lives in `subskills/schema-design.md`; this section only gives the default confidence-specific order.
 
 Default order for confidence-heavy grounded schemas:
 

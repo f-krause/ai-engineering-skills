@@ -39,7 +39,7 @@ For serious B2B document workflows, aim for level 3 by default and level 4 when 
 1. Citations are data, not formatting. Store them in structured objects.
 2. Keep answer text separate from citation metadata so the UI can render footnotes, tooltips, page jumps, or highlights differently.
 3. Require citations whenever the answer depends on retrieval or source documents.
-4. If evidence is missing or cannot be resolved confidently, abstain or mark the answer as `insufficient_evidence`.
+4. If evidence cannot be resolved confidently, do not emit a precise-looking citation. Degrade to section-level provenance, source-level provenance, or let the workflow abstain or route to review.
 5. Derive displayed quotes from resolved offsets or block IDs whenever possible, not from model prose alone.
 6. Keep provenance immutable enough for audits: source version, file hash, document timestamp, or ingestion version should be available.
 7. If source documents can change, distinguish citation-to-source-version from citation-to-latest-document.
@@ -55,7 +55,7 @@ Ask the model for:
 - supporting evidence quotes or minimal evidence spans
 - source identifiers
 - page markers when available
-- optional confidence or support type
+- optional support type
 
 The model is good at selecting the relevant supporting text. It is less reliable at exact character positions or page geometry.
 
@@ -250,7 +250,7 @@ Measure at least:
 3. citation granularity: source-only vs chunk vs exact text vs geometry
 4. quote fidelity: whether the displayed quote actually appears in the source version
 5. resolution success rate: how often extracted evidence is mapped to exact provenance
-6. abstention quality when evidence is missing or ambiguous
+6. degradation behavior when exact provenance is missing or ambiguous
 
 Add hard cases for:
 

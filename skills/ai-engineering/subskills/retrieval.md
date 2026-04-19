@@ -1,6 +1,6 @@
 # Retrieval and Grounding
 
-Use this subskill when adding or changing file search, knowledge tools, RAG, vector databases, reranking, chunking, citations, or grounded answer generation.
+Use this subskill when adding or changing file search, knowledge tools, RAG, vector databases, reranking, chunking, or grounded answer generation.
 
 ## Decision Rule
 
@@ -20,7 +20,7 @@ This subskill is about finding and preparing evidence. If the change is mainly a
 ## Architecture Rules
 
 1. Evaluate retrieval separately from generation. If the retriever misses the evidence, prompt tuning the answer step will not fix the system.
-2. Preserve citations from the start: source ID, page, section, chunk ID, URL, or document timestamp. Treat grounding metadata as part of the contract.
+2. Preserve source metadata from the start: source ID, page, section, chunk ID, URL, or document timestamp. Treat grounding metadata as part of the contract.
 3. Scope retrieval tightly by tenant, customer, document set, or case whenever cross-entity contamination is possible.
 4. Prefer exact filters and lexical search whenever queries include identifiers, codes, dates, product names, or legal clause references.
 5. If you use embeddings, combine them with BM25 or equivalent lexical retrieval rather than relying on embeddings alone.
@@ -28,7 +28,7 @@ This subskill is about finding and preparing evidence. If the change is mainly a
 7. Return compact retrieval results to the model: short excerpts plus metadata, not giant raw dumps.
 8. Keep retrieval as an explicit tool boundary in agentic systems. Do not hide a large implicit knowledge dump inside the prompt when the model should reason over cited evidence.
 9. Make the final answer cite the evidence it actually used.
-10. When the product needs exact page highlights or bounding boxes, use the model to identify evidence text and a document-layout layer to resolve geometry. Do not ask the model to hallucinate coordinates.
+10. If the product needs exact evidence locations, page highlights, or bounding boxes, hand off to `subskills/citations.md` rather than overloading retrieval logic with provenance resolution.
 
 ## Chunking and Document Prep
 
@@ -56,11 +56,10 @@ Prefer answer schemas like:
 
 - `answer`
 - `citations`
-- `confidence_bucket` or `answer_status`
-- `disposition`
+- `answer_status`
 - `missing_information` when the evidence is incomplete
 
-This keeps grounded answering auditable in B2B systems.
+This keeps grounded answering auditable in B2B systems. If grounded evidence should also drive trust levels, abstention, or review routing, pair this file with `subskills/confidence.md`.
 
 ## Retrieval Evals
 
