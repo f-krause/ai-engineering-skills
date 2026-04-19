@@ -1,0 +1,67 @@
+---
+name: ai-engineering
+description: Use when planning, writing or updating LLM calls, prompts, model selection, tool definitions, structured outputs, Zod/Pydantic schemas, agent loops, AI workflows, prompt-injection defenses, or AI evals in Python or TypeScript. This is a general AI engineering router skill.
+---
+
+# AI Engineering
+
+This skill is the default entrypoint for AI changes in any codebase using it. Keep it loaded for any LLM call, agent, workflow, or structured AI schema change, then read only the internal subskill file that matches the task.
+
+## Always Apply
+
+1. Verify current SDK and provider APIs before coding.
+2. Prefer the simplest architecture that meets the requirement: direct LLM call, then structured workflow, then a single agent, then multi-agent only if proven necessary.
+3. Make machine-consumed outputs schema-first. If downstream code branches on it, encode that branch in Zod for TypeScript or Pydantic for Python instead of prose.
+4. Separate instructions from user input, retrieved content, and tool output. Treat all non-system text as untrusted data.
+5. Version prompts, schemas, and model choices together, and add eval coverage when behavior changes.
+6. Default to the provider already established by the project. If the project is greenfield and the task does not require another provider, OpenAI is a reasonable starting default.
+7. If a workflow sends many near-identical requests over the same long file or shared context, check provider-side prompt or context caching before inventing custom memoization. Start with `subskills/llm-calls.md`, then read the matching file under `subskills/caching/`.
+8. If AI behavior changes, run the project's AI-focused regression tests if they exist.
+
+## Routing
+
+```mermaid
+flowchart TD
+    A[AI task] --> B{What changed?}
+    B -->|Prompt or model call| C[subskills/llm-calls.md]
+    B -->|Repeated long-context reuse or caching| I[subskills/caching/*.md]
+    B -->|Structured output or tool schema| D[subskills/schema-design.md]
+    B -->|Predefined multi-step flow| E[subskills/workflows.md]
+    B -->|Autonomous tool loop| F[subskills/agents.md]
+    B -->|Tracing and observability| G[subskills/tracing.md]
+    B -->|Security, guardrails, evals| H[subskills/safety-evals.md]
+```
+
+Read the matching subskill before editing:
+
+- Direct model calls, prompt structure, streaming, provider rate limits, retries, backoff, and provider choices: `subskills/llm-calls.md`
+- OpenAI prompt caching, `prompt_cache_key`, and extended retention: `subskills/caching/openai.md`
+- Anthropic automatic caching, block breakpoints, and `cache_control`: `subskills/caching/anthropic.md`
+- Gemini implicit caching, explicit cache objects, and TTL handling: `subskills/caching/gemini.md`
+- Mistral caching limits and when to own caching yourself: `subskills/caching/mistral.md`
+- Azure OpenAI prompt caching and Azure-vs-native differences: `subskills/caching/azure-openai.md`
+- Azure Claude caching through Anthropic-style semantics: `subskills/caching/azure-claude.md`
+- Azure-hosted Mistral and missing documented prompt caching support: `subskills/caching/azure-mistral.md`
+- Zod/Pydantic Schema, tool contracts, and structured output design: `subskills/schema-design.md`
+- Predefined prompt chains, routing, parallelization, orchestrator-workers, and evaluator-optimizer flows: `subskills/workflows.md`
+- Autonomous planning, tool use, checkpoints, stop conditions, and human-in-the-loop agents: `subskills/agents.md`
+- MLflow-based local tracing, searchable traces, span design, and trace retention for debugging and improvement loops: `subskills/tracing.md`
+- Prompt injection defense, authorization, model tradeoffs, and regression testing: `subskills/safety-evals.md`
+
+## Companion Skills
+
+Load adjacent skills when your environment includes them:
+
+- AI SDK or provider-wrapper skills for framework-specific invocation details
+- UI or chat-element skills for frontend rendering of model output
+- Framework-specific app skills when AI behavior is embedded in a larger web application
+
+## File-Level Heuristics
+
+- Prompt builders, model registries, provider clients, or raw generation calls: read `subskills/llm-calls.md`
+- Repeated large-file requests, long shared prefixes, cache-control parameters, cache handles, or provider-specific cache tradeoffs: read the matching file under `subskills/caching/`
+- Tool inputs and outputs, structured objects, or schema helpers: read `subskills/schema-design.md`
+- Predefined step-by-step orchestration, fixed branching, or model pipelines: read `subskills/workflows.md`
+- Autonomous planning, dynamic tool choice, or stop conditions: read `subskills/agents.md`
+- Trace setup, trace search, evaluation datasets from traces, or observability instrumentation: read `subskills/tracing.md`
+- Prompt defense, permissions, eval harnesses, or model routing: read `subskills/safety-evals.md`
