@@ -2,6 +2,20 @@
 
 Portable repository for the `ai-engineering` skill of [Felix Krause](https://www.f-krause.at/), packaged for the `skills.sh` ecosystem.
 
+## Quick Start
+
+Install the skill:
+
+```bash
+npx skills add f-krause/ai-engineering-skills --skill ai-engineering
+```
+
+Update the skill later:
+
+```bash
+npx skills update ai-engineering
+```
+
 ## Contents
 
 ```text
@@ -28,29 +42,9 @@ ai-engineering-skills/
             └── workflows.md
 ```
 
-## Local Validation
+## More Details
 
-Run these commands from the parent directory of this folder.
-
-List the skills exported by this repo:
-
-```bash
-npx skills add ./ai-engineering-skills --list
-```
-
-Install the skill from the local folder:
-
-```bash
-npx skills add ./ai-engineering-skills --skill ai-engineering
-```
-
-Install it globally for a specific agent:
-
-```bash
-npx skills add ./ai-engineering-skills --skill ai-engineering -g -a codex
-```
-
-## How Others Install It
+### Install Options
 
 Install from GitHub shorthand:
 
@@ -82,7 +76,7 @@ List the skills available in the repo before installing:
 npx skills add f-krause/ai-engineering-skills --list
 ```
 
-## How Others Update It
+### Update Options
 
 Update all installed skills:
 
@@ -107,6 +101,34 @@ Update only project-installed skills:
 ```bash
 npx skills update -p
 ```
+
+## Local Validation
+
+Run these commands from the parent directory of this folder.
+
+List the skills exported by this repo:
+
+```bash
+npx skills add ./ai-engineering-skills --list
+```
+
+Install the skill from the local folder:
+
+```bash
+npx skills add ./ai-engineering-skills --skill ai-engineering
+```
+
+Install it globally for a specific agent:
+
+```bash
+npx skills add ./ai-engineering-skills --skill ai-engineering -g -a codex
+```
+
+## Notes
+
+- The actual skill package is the `skills/ai-engineering/` directory.
+- `README.md` and `CHANGELOG.md` are for humans maintaining and adopting the repo.
+- The `skills.sh` ecosystem discovers skills from repositories containing valid `SKILL.md` files with frontmatter.
 
 ## Maintainer Workflow
 
@@ -144,10 +166,3 @@ Recommended interpretation:
 - Major: breaking restructures or changed trigger semantics
 - Minor: new subskills, new workflows, expanded coverage
 - Patch: typo fixes, clarifications, small corrections
-
-
-## Notes
-
-- The actual skill package is the `skills/ai-engineering/` directory.
-- `README.md` and `CHANGELOG.md` are for humans maintaining and adopting the repo.
-- The `skills.sh` ecosystem discovers skills from repositories containing valid `SKILL.md` files with frontmatter.
