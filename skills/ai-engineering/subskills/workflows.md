@@ -40,6 +40,8 @@ Use when the input belongs to distinct categories that should go to different pr
 
 Use when independent subtasks can be run concurrently, or when multiple passes improve confidence through voting or focused review.
 
+Parallelization is not only a latency decision. It can also change cache hit rates and cost. If many parallel calls share the same long document, system prompt, tool schema, or examples, think about execution order and batching strategy with provider caching in mind.
+
 ### Orchestrator-workers
 
 Use when the overall workflow is still code-owned, but a coordinator model needs to break work into variable subproblems before handing them to bounded worker calls.
@@ -60,6 +62,7 @@ This is often the highest-leverage pattern for B2B tasks that must be accurate, 
 6. Pass only the minimum context needed for each step.
 7. Prefer verifier stages over open-ended self-reflection. A bounded critique with explicit pass or fail criteria is easier to test.
 8. When a step fails repeatedly, escalate or fail closed instead of looping until the budget is gone.
+9. For high fan-out workflows, schedule work in a cache-aware order when the provider benefits from shared prompt prefixes or explicit cache objects. In practice, grouping by shared document or shared context can be cheaper than processing strictly in request-arrival order.
 
 ## Verification Pattern
 

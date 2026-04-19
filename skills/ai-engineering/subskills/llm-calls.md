@@ -44,9 +44,12 @@ If many requests reuse the same long file, system prompt, tool schema, examples,
 
 - Put the most stable content first and move per-request variables to the end.
 - Keep tool definitions, structured-output schemas, examples, and image settings byte-stable across requests when the provider requires exact matches.
+- When parallelizing many calls, consider cache-aware scheduling. Group or order work by shared document or shared context when that improves prefix or prompt-cache reuse at the provider.
 - Log provider-specific cache hit fields so you can confirm the optimization is real instead of assumed.
 - Warm the cache before high fan-out workflows when the provider only makes a new cache entry visible after the first request starts returning.
 - Separate provider prompt caching from your own response caches and document preprocessing caches. In production you often need all three layers.
+
+This means the cheapest execution order is not always the most obvious one. For example, processing tasks grouped by document can be cheaper than processing them strictly by user request order when the provider reuses long shared prefixes effectively.
 
 ### Provider files
 
