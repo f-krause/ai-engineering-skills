@@ -36,6 +36,7 @@ ai-engineering-skills/
             │   ├── mistral.md
             │   └── openai.md
             ├── citations.md
+            ├── confidence.md
             ├── llm-calls.md
             ├── retrieval.md
             ├── safety-evals.md

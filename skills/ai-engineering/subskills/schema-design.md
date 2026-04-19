@@ -14,6 +14,7 @@ Design the schema before the prompt. The schema is the contract between the mode
 8. Never let the model supply security-critical context such as tenant IDs, auth scope, or hidden tool parameters. Inject those server-side.
 9. Include evidence or citation fields whenever the output must be auditable against source material.
 10. Encode stop reasons, approval states, and route choices as enums instead of free-form text.
+11. When output tokens matter, design a lean runtime schema and a richer audit schema instead of forcing every request to emit the full internal rubric.
 
 ## Schema-Guided Reasoning Patterns
 
@@ -26,6 +27,8 @@ Use these patterns deliberately:
 These patterns are useful when the model must not skip intermediate checks, must choose among tools safely, or must plan adaptively without keeping stale long-form plans.
 
 The order of fields is part of the control surface. If you want the model to reason before answering, place reasoning fields before the final answer field. If you want explicit tool routing before arguments, place the route discriminator before the tool payload.
+
+One practical detail from Anthropic's structured output docs: output ordering is not always a naive copy of schema property order. Required properties are emitted before optional properties, each in schema order. If property order matters to your application or prompt design, either keep the relevant fields required or account for provider reordering in your parser and tests.
 
 ## Examples
 
@@ -43,9 +46,11 @@ class AnalysisResult(BaseModel):
         description="Key facts"
     )
     reasoning: str = Field(description="Short reasoning")
-    confidence: Annotated[int, Ge(1), Le(5)] = Field(description="1 to 5")
     final_answer: Literal["approve", "reject", "needs_review"] = Field(
         description="Decision"
+    )
+    confidence_bucket: Literal["low", "medium", "high", "very_high"] = Field(
+        description="Confidence bucket"
     )
 ```
 
@@ -53,7 +58,7 @@ Why this shape works:
 
 - `evidence` comes before `reasoning`, and `reasoning` before `final_answer`
 - the enum on `final_answer` removes ambiguous free text
-- `confidence` is an integer with hard bounds
+- `confidence_bucket` comes after `final_answer` because it is a meta-judgment about the answer, not evidence for the answer itself
 - field descriptions stay short; longer policy belongs in the system prompt
 
 ### Python: routing with discriminated unions
@@ -129,20 +134,22 @@ import { z } from "zod";
 export const analysisResultSchema = z.object({
   evidence: z.array(z.string()).min(1).max(3).describe("Key facts"),
   reasoning: z.string().describe("Short reasoning"),
-  confidence: z.int().min(1).max(5).describe("1 to 5"),
   escalationReason: z.string().optional().describe("Only if needed"),
   finalAnswer: z
     .enum(["approve", "reject", "needs_review"])
     .describe("Decision"),
+  confidenceBucket: z
+    .enum(["low", "medium", "high", "very_high"])
+    .describe("Confidence bucket"),
 });
 ```
 
 Why this shape works:
 
 - `z.enum(...)` is better than a free string when code branches on the result
-- `z.int().min().max()` makes numeric bounds explicit
+- a small confidence enum is usually more stable than a raw decimal or ordinal score
 - `.optional()` is useful for conditional details, but do not make core decision fields optional
-- the order still matters: reasoning appears before `finalAnswer`
+- the order still matters: reasoning appears before `finalAnswer`, and `confidenceBucket` comes after it as a summary judgment
 
 ### TypeScript: routed tool schema
 
@@ -226,6 +233,7 @@ When you use page markers such as `@@page_14@@`, keep them in the model-produced
 9. When an agent is budgeted, expose budget-relevant fields like remaining steps or stop reason explicitly instead of hiding them in free text.
 10. When outputs need citations, separate model-produced evidence objects from code-produced resolved citation objects.
 11. If page markers are used for citation resolution, model the marker as a dedicated field instead of burying it inside the quote text.
+12. Prefer short enums or reason codes over verbose explanations for runtime confidence signaling when token cost matters.
 
 ### Description anti-pattern
 
@@ -256,6 +264,30 @@ For grounded answers over documents, prefer this contract shape:
 This split prevents a common failure mode where the model emits plausible-looking page numbers or offsets that were never verified against the source.
 
 If the system uses page markers, put the marker on `ExtractedEvidence` and keep `ResolvedCitation.page_start` or equivalent as the verified physical page produced by code. Do not treat the page marker itself as final provenance.
+
+## Confidence Pattern
+
+For confidence-heavy workflows, prefer:
+
+1. place evidence, contradiction, and answerability checks before the final answer
+2. place `answer` or `final_answer` before `confidence_bucket`
+3. place `disposition` after `confidence_bucket` if the disposition depends on that confidence judgment
+4. use a richer audit schema only when you need the full internal rubric
+
+Default order for grounded business workflows:
+
+1. support or evidence fields
+2. conflict or answerability fields
+3. final answer
+4. confidence bucket
+5. disposition
+6. optional short reason codes
+
+This avoids paying for long internal rubrics on every request while preserving observability where it matters.
+
+Exception:
+
+- If confidence is itself an intermediate checkpoint in a multi-stage workflow, place that checkpoint earlier on purpose. Do not do this accidentally for final user-facing confidence.
 
 ## Failure Handling
 

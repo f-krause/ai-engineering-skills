@@ -58,8 +58,22 @@ Choose measures that match the architecture:
 - workflows: per-step success, routing correctness, final outcome
 - agents: final environment state, transcript quality, tool-call correctness, stop reason
 - retrieval systems: recall at K, citation quality, grounded-answer correctness
+- confidence systems: answer vs abstain vs review correctness, contradiction handling, and empirical accuracy by confidence bucket
 
 If the system creates or modifies business artifacts, measure the artifact directly. Grade the spreadsheet, ticket, summary, or code diff, not only the assistant text around it.
+
+## Confidence and Calibration
+
+Treat confidence as a workflow decision problem, not as a decimal the model self-reports.
+
+Good patterns:
+
+- define explicit confidence criteria such as source reliability, evidence strength, contradiction status, and answerability
+- use categories or pass/fail-style review routing rather than pseudo-precise online probabilities
+- measure whether `high` or `very_high` outputs are actually more accurate than `medium` or `low`
+- evaluate abstention and human-review routing separately from answer correctness
+
+If a confidence bucket does not correspond to meaningfully different observed accuracy, the bucket design is weak.
 
 ## Dataset Construction
 
@@ -88,6 +102,7 @@ For important launches, sample failing and passing traces for human review. Auto
 - If AI prompts, tools, or routing behavior changed, run the project's AI-focused regression tests if they exist.
 - For changes in model invocation shape, also read `subskills/llm-calls.md`.
 - For tool permissions and planner safety, also read `subskills/agents.md`.
+- For criteria-based confidence, abstention, and review routing, also read `subskills/confidence.md`.
 - For real-execution telemetry and turning traces into eval datasets, also read `subskills/tracing.md`.
 
 ## Sources
