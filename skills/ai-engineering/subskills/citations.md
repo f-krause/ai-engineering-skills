@@ -13,7 +13,7 @@ Use a two-stage citation pipeline:
 
 For page-based documents, the strongest default is:
 
-- place easily extractable page markers (e.g. "@@page_<nr>@@" or "<- page_<nr> ->") in the document
+- place easily extractable page markers (e.g. "@@page_<nr>@@" or "<!-- page <nr> -->") in the document
 - retrieve candidate evidence
 - ask the model to extract the minimal supporting quote or evidence span and page marker
 - parse the physical page number from the page marker in code instead of trusting displayed page labels inside the PDF
@@ -78,7 +78,7 @@ For PDFs and other page-based documents, explicit page markers are often the mos
 Recommended marker shapes:
 
 - `@@page_14@@`
-- `<- page_14 ->`
+- `<!-- page_14 -->`
 
 Good markers should be:
 
