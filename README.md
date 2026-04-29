@@ -38,6 +38,7 @@ ai-engineering-skills/
             ├── citations.md
             ├── confidence.md
             ├── llm-calls.md
+            ├── openai-web-search.md
             ├── retrieval.md
             ├── safety-evals.md
             ├── schema-design.md

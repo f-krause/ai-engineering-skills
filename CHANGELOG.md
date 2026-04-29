@@ -6,6 +6,9 @@ The format is intentionally simple and can be maintained by hand.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-29
+
+- Added `openai-web-search.md` for OpenAI Responses API hosted web search, structured outputs, URL annotations, source lists, filters, and citation handling.
 - Polished cross-references and subskill boundaries so retrieval, citations, confidence, schema design, and eval guidance work as a cleaner whole.
 - Added a dedicated `confidence.md` subskill for criteria-based confidence, abstention, review routing, contradiction handling, and lean-vs-audit schema tradeoffs.
 - Added a dedicated `citations.md` subskill for structured provenance, evidence extraction, exact text matching, page mapping, and layout-grounded highlights.

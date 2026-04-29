@@ -1,6 +1,6 @@
 ---
 name: ai-engineering
-description: Use when planning, writing or updating LLM calls, prompts, model selection, retrieval or RAG, citations, confidence logic, tool definitions, structured outputs, Zod/Pydantic schemas, agent loops, AI workflows, prompt-injection defenses, or AI evals in Python or TypeScript. This is a general AI engineering router skill.
+description: Use when planning, writing or updating LLM calls, prompts, model selection, retrieval or RAG, OpenAI web search, citations, confidence logic, tool definitions, structured outputs, Zod/Pydantic schemas, agent loops, AI workflows, prompt-injection defenses, or AI evals in Python or TypeScript. This is a general AI engineering router skill.
 ---
 
 # AI Engineering
@@ -29,6 +29,7 @@ flowchart TD
     B -->|Repeated long-context reuse or caching| I[subskills/caching/*.md]
     B -->|Structured output or tool schema| D[subskills/schema-design.md]
     B -->|Retrieval, file search, RAG, grounding| J[subskills/retrieval.md]
+    B -->|OpenAI hosted web search| M[subskills/openai-web-search.md]
     B -->|Citations, evidence spans, page locations, highlights| K[subskills/citations.md]
     B -->|Confidence, abstention, review thresholds| L[subskills/confidence.md]
     B -->|Predefined multi-step flow| E[subskills/workflows.md]
@@ -42,6 +43,7 @@ flowchart TD
 - `subskills/llm-calls.md`: single calls, prompt shape, retries, rate limits, model selection, and provider caching. If the issue is repeated long-context reuse, then read the matching file under `subskills/caching/`.
 - `subskills/schema-design.md`: the model contract itself, including field order, enums, discriminated unions, and lean versus audit schemas.
 - `subskills/retrieval.md`: how evidence is found, scoped, chunked, reranked, and passed into grounded answering.
+- `subskills/openai-web-search.md`: OpenAI Responses API hosted web search, source filters, URL annotations, source lists, and structured-output citation handling.
 - `subskills/citations.md`: how answers map back to exact evidence locations, pages, offsets, and highlights.
 - `subskills/confidence.md`: how evidence quality, contradictions, and review thresholds map to confidence, abstention, and review routing.
 - `subskills/workflows.md`: code-owned multi-step orchestration.
@@ -53,6 +55,7 @@ Common combinations:
 
 - grounded answering: `retrieval.md` plus `citations.md`
 - grounded answering with review routing: `retrieval.md` plus `citations.md` plus `confidence.md`
+- OpenAI web search with structured output: `openai-web-search.md` plus `schema-design.md` plus `citations.md`
 - any structured AI output that feeds code: `schema-design.md` plus the domain subskill above it
 
 ## Companion Skills
