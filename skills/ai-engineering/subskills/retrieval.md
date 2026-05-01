@@ -92,10 +92,6 @@ If the product depends on document references, eval the references directly inst
 - For inline citations, exact text provenance, or PDF highlight mapping, also read `subskills/citations.md`.
 - If answer quality changes after retrieval changes, update both retrieval and end-to-end evals.
 
-## Sources
+## Source Notes
 
-- https://www.anthropic.com/engineering/contextual-retrieval (last accessed 19.04.2026)
-- https://docs.anthropic.com/en/docs/build-with-claude/search-results (last accessed 19.04.2026)
-- https://www.anthropic.com/news/introducing-citations-api (last accessed 19.04.2026)
-- https://abdullin.com/ilya/how-to-build-best-rag/ (last accessed 19.04.2026)
-- https://abdullin.com/llm-benchmarks (last accessed 19.04.2026)
+Sources for this page live in `sources.md#retrieval`.

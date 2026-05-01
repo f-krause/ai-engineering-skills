@@ -22,7 +22,6 @@ If you need performance or cost wins around Azure-hosted Mistral workloads, look
 - Document preprocessing caches for OCR, parsing, chunking, and embeddings.
 - Prompt-size reduction, batching, or output-side optimizations that the specific Mistral model card documents.
 
-## Sources
+## Source Notes
 
-- https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners (last accessed 17.04.2026)
-- https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/deploy-models-mistral-codestral (last accessed 17.04.2026)
+Sources for this page live in `sources.md#caching-azure-mistral`.

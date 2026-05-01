@@ -22,7 +22,6 @@ Claude on Azure AI Foundry should be treated as Anthropic-style caching, not Azu
 - For large shared tools, system prompts, or long structured conversations, follow the Anthropic guidance in `subskills/caching/anthropic.md`.
 - Do not reuse Azure OpenAI assumptions like `prompt_cache_key` or Azure OpenAI retention wording for Claude.
 
-## Sources
+## Source Notes
 
-- https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-claude (last accessed 17.04.2026)
-- https://platform.claude.com/docs/en/build-with-claude/prompt-caching (last accessed 17.04.2026)
+Sources for this page live in `sources.md#caching-azure-claude`.

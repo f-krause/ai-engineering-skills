@@ -25,8 +25,6 @@ For Mistral-heavy systems, plan on your own caches:
 - Document preprocessing caches for OCR, parsing, chunking, and embeddings.
 - Artifact caches for extracted schemas or normalized intermediate representations.
 
-## Sources
+## Source Notes
 
-- https://docs.mistral.ai/capabilities/predicted_outputs (last accessed 17.04.2026)
-- https://docs.mistral.ai/capabilities/completion/usage (last accessed 17.04.2026)
-- https://docs.mistral.ai/models/mistral-large-2-1-24-11 (last accessed 17.04.2026)
+Sources for this page live in `sources.md#caching-mistral`.

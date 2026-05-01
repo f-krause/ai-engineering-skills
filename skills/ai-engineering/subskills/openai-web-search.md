@@ -4,6 +4,16 @@ Use this subskill when adding or changing OpenAI hosted web search, especially w
 
 This file is OpenAI-specific. For general retrieval architecture also read `retrieval.md`; for provenance UX and citation storage also read `citations.md`; for Pydantic or Zod schema design also read `schema-design.md`.
 
+## Contents
+
+- Decision Rule: lines 17-22
+- Integration Defaults: lines 23-34
+- Citations: lines 35-47
+- Structured Outputs With Web Search: lines 48-139
+- Claim-Level Citation Mapping: lines 140-166
+- Source Quality Rules: lines 167-174
+- Source Notes: lines 175-177
+
 ## Decision Rule
 
 Use OpenAI hosted `web_search` when the answer depends on broad, public, fast-changing, or open-world information.
@@ -17,7 +27,7 @@ Do not use web search when the source of truth is a tenant-private corpus, uploa
 3. Use Chat Completions search models only when preserving an existing Chat Completions integration. In Chat Completions, search models search before every answer; in Responses, web search is a tool the model can choose to use.
 4. Use a fast/non-reasoning setup for simple lookups; use a reasoning model and higher reasoning effort for multi-hop investigation; use deep research/background mode only for long-running reports.
 5. Set `search_context_size` intentionally: `low` for simple facts, `medium` as the normal default, `high` for detail-heavy synthesis. It is not an exact token or source-count control.
-6. Use `filters.allowed_domains` or `filters.blocked_domains` when source quality matters. Domains omit `https://` and include subdomains.
+6. Use `filters.allowed_domains` or `filters.blocked_domains` when source quality matters. Domains omit the URL scheme and include subdomains.
 7. Add approximate `user_location` only when local relevance is product-relevant, such as restaurants, weather, local rules, or events.
 8. Set `external_web_access: false` only when the workflow must avoid live fetching and can tolerate cached/indexed results.
 9. Use `include=["web_search_call.action.sources"]` when audit logs need every consulted URL, not just the URLs cited inline.
@@ -162,9 +172,6 @@ This two-step pattern is more reliable than asking the web-search call to both d
 4. Log search action metadata, cited URLs, consulted sources, model, tool config, prompt/schema version, and timestamp.
 5. Evaluate search-backed systems on answer correctness, citation relevance, citation clickability, source quality, freshness, and abstention when evidence is insufficient.
 
-## Sources
+## Source Notes
 
-- https://developers.openai.com/api/docs/guides/tools-web-search (last accessed 29.04.2026)
-- https://developers.openai.com/api/docs/guides/structured-outputs (last accessed 29.04.2026)
-- https://developers.openai.com/api/docs/guides/citation-formatting (last accessed 29.04.2026)
-- https://developers.openai.com/cookbook/examples/responses_api/responses_example (last accessed 29.04.2026)
+Sources for this page live in `sources.md#openai-web-search`.

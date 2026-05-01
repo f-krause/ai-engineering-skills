@@ -32,7 +32,6 @@ OpenAI uses automatic prompt caching on recent models, `gpt-4o` and newer. This 
 - `prompt_cache_key` is not a reusable cache handle.
 - OpenAI prompt caching does not replace your own response cache or document preprocessing cache.
 
-## Sources
+## Source Notes
 
-- https://developers.openai.com/api/docs/guides/prompt-caching (last accessed 17.04.2026)
-- https://developers.openai.com/api/reference/chat/create (last accessed 17.04.2026)
+Sources for this page live in `sources.md#caching-openai`.

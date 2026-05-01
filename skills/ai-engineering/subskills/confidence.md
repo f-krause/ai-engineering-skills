@@ -4,6 +4,24 @@ Use this subskill when adding or changing confidence buckets, abstention behavio
 
 This subskill is about trust and decisions under uncertainty. If the main issue is how evidence is found, read `subskills/retrieval.md`. If the main issue is how evidence locations or highlights are resolved, read `subskills/citations.md`. If the main issue is only the output contract, read `subskills/schema-design.md`.
 
+## Contents
+
+- Core Position: lines 25-40
+- Preferred Output Shape: lines 41-64
+- Field Order: lines 65-85
+- Why Categories Beat Raw Numbers: lines 86-97
+- Criteria-Based Confidence: lines 98-156
+- Recommended Workflow: lines 157-168
+- Mapping Rules: lines 169-188
+- Contradictions and Counter-Evidence: lines 189-206
+- Cost Tradeoff: lines 207-244
+- Lean Schema Pattern: lines 245-261
+- Audit Schema Pattern: lines 262-280
+- Evaluation Guidance: lines 281-300
+- TypeScript and Python: lines 301-306
+- Project Notes: lines 307-313
+- Source Notes: lines 314-316
+
 ## Core Position
 
 Do not treat model confidence as introspection you can trust directly.
@@ -293,17 +311,6 @@ If the buckets do not separate empirically, the rubric is weak.
 - For schema design and enum-heavy contracts, also read `subskills/schema-design.md`.
 - For eval design and human-review calibration, also read `subskills/safety-evals.md`.
 
-## Sources
+## Source Notes
 
-- https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations (last accessed 19.04.2026)
-- https://platform.claude.com/docs/en/test-and-evaluate/define-success (last accessed 19.04.2026)
-- https://developers.openai.com/api/docs/guides/evaluation-best-practices (last accessed 19.04.2026)
-- https://hamel.dev/blog/posts/evals-faq/how-do-we-evaluate-a-models-ability-to-express-uncertainty-or-know-what-it-doesnt-know.html (last accessed 19.04.2026)
-- https://hamel.dev/blog/posts/evals-faq/why-do-you-recommend-binary-passfail-evaluations-instead-of-1-5-ratings-likert-scales.html (last accessed 19.04.2026)
-- https://abdullin.com/schema-guided-reasoning/ (last accessed 19.04.2026)
-- https://aclanthology.org/2023.findings-acl.551/ (last accessed 19.04.2026)
-- https://aclanthology.org/2025.acl-short.18/ (last accessed 19.04.2026)
-- https://research.google/pubs/metafaith-faithful-natural-language-uncertainty-expression-in-llms/ (last accessed 19.04.2026)
-- https://www.nature.com/articles/s41586-024-07421-0 (last accessed 19.04.2026)
-- https://aclanthology.org/2025.findings-acl.234/ (last accessed 19.04.2026)
-- https://aclanthology.org/2024.emnlp-main.499/ (last accessed 19.04.2026)
+Sources for this page live in `sources.md#confidence`.

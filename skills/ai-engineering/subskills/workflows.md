@@ -127,10 +127,6 @@ This is still a workflow even though it loops once, because code owns the loop a
 - For retrieval-heavy steps, also read `subskills/retrieval.md`.
 - If workflow behavior changes, run the project's AI-focused regression tests if they exist.
 
-## Sources
+## Source Notes
 
-- https://www.philschmid.de/agent-skills-tips (last accessed 17.04.2026)
-- https://www.anthropic.com/engineering/building-effective-agents (last accessed 17.04.2026)
-- https://abdullin.com/schema-guided-reasoning/adaptive-planning (last accessed 17.04.2026)
-- https://ai-sdk.dev/docs/foundations/tools (last accessed 17.04.2026)
-- https://research.google/blog/ds-star-a-state-of-the-art-versatile-data-science-agent/ (last accessed 19.04.2026)
+Sources for this page live in `sources.md#workflows`.

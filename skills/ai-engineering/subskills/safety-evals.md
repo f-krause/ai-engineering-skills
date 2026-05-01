@@ -106,13 +106,6 @@ For important launches, sample failing and passing traces for human review. Auto
 - For criteria-based confidence, abstention, and review routing, also read `subskills/confidence.md`.
 - For real-execution telemetry and turning traces into eval datasets, also read `subskills/tracing.md`.
 
-## Sources
+## Source Notes
 
-- https://www.philschmid.de/agent-skills-tips (last accessed 17.04.2026)
-- https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html (last accessed 17.04.2026)
-- https://platform.claude.com/docs/en/about-claude/models/choosing-a-model (last accessed 17.04.2026)
-- https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents (last accessed 19.04.2026)
-- https://developers.openai.com/api/docs/guides/evaluation-best-practices (last accessed 19.04.2026)
-- https://developers.openai.com/api/docs/guides/agent-builder-safety (last accessed 19.04.2026)
-- https://openai.com/index/gdpval/ (last accessed 19.04.2026)
-- https://www.philschmid.de/testing-skills (last accessed 19.04.2026)
+Sources for this page live in `sources.md#safety-evals`.

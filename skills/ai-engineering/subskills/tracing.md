@@ -108,11 +108,6 @@ If an agent cannot find or query past executions locally, the tracing setup is i
 - keep request-level orchestration code structured so manual instrumentation can be added around it
 - persist traces to a local MLflow server, not just ephemeral console logs
 
-## Sources
+## Source Notes
 
-- https://mlflow.org/docs/latest/genai/tracing/ (last accessed 17.04.2026)
-- https://mlflow.org/docs/latest/genai/tracing/quickstart (last accessed 17.04.2026)
-- https://mlflow.org/docs/latest/genai/tracing/integrations/listing/openai (last accessed 17.04.2026)
-- https://mlflow.org/docs/latest/api_reference/python_api/mlflow.html (last accessed 17.04.2026)
-- https://mlflow.org/docs/latest/api_reference/python_api/mlflow.tracing.html (last accessed 17.04.2026)
-- https://mlflow.org/docs/latest/genai/tracing/search-traces/ (last accessed 17.04.2026)
+Sources for this page live in `sources.md#tracing`.

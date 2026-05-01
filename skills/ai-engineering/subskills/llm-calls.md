@@ -86,17 +86,6 @@ Do not mix instructions into retrieved documents or tool results.
 - If this call feeds a tool, structured output, or persisted object, also read `subskills/schema-design.md`.
 - If prompt or generation behavior changes, run the project's AI-focused regression tests if they exist.
 
-## Sources
+## Source Notes
 
-- https://www.philschmid.de/agent-skills-tips (last accessed 17.04.2026)
-- https://developers.openai.com/api/docs/guides/prompt-caching (last accessed 17.04.2026)
-- https://platform.claude.com/docs/en/build-with-claude/prompt-caching (last accessed 17.04.2026)
-- https://ai.google.dev/gemini-api/docs/caching (last accessed 17.04.2026)
-- https://docs.mistral.ai/capabilities/predicted_outputs (last accessed 17.04.2026)
-- https://docs.mistral.ai/models/mistral-large-2-1-24-11 (last accessed 17.04.2026)
-- https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching?view=foundry-classic (last accessed 17.04.2026)
-- https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-claude (last accessed 17.04.2026)
-- https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners (last accessed 17.04.2026)
-- https://platform.claude.com/docs/en/build-with-claude/structured-outputs (last accessed 17.04.2026)
-- https://platform.claude.com/docs/en/about-claude/models/choosing-a-model (last accessed 17.04.2026)
-- https://ai-sdk.dev/docs/foundations/tools (last accessed 17.04.2026)
+Sources for this page live in `sources.md#llm-calls`.

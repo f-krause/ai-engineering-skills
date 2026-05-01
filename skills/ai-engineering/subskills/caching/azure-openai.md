@@ -35,8 +35,6 @@ Treat retention wording as deployment-surface-sensitive and re-check the current
 - Verify behavior with `cached_tokens`.
 - Re-check the current Azure doc before promising a specific retention window.
 
-## Sources
+## Source Notes
 
-- https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching?view=foundry-classic (last accessed 17.04.2026)
-- https://learn.microsoft.com/en-gb/azure/ai-foundry/openai/how-to/prompt-caching (last accessed 17.04.2026)
-- https://learn.microsoft.com/en-us/answers/questions/5807188/does-azure-openai-support-extended-prompt-cache-re (last accessed 17.04.2026)
+Sources for this page live in `sources.md#caching-azure-openai`.

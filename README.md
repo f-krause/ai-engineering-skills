@@ -25,6 +25,9 @@ ai-engineering-skills/
 └── skills/
     └── ai-engineering/
         ├── SKILL.md
+        ├── evals/
+        │   └── trigger-queries.json
+        ├── sources.md
         └── subskills/
             ├── agents.md
             ├── caching/
@@ -42,6 +45,8 @@ ai-engineering-skills/
             ├── retrieval.md
             ├── safety-evals.md
             ├── schema-design.md
+            ├── schema-examples.md
+            ├── schema-provider-support.md
             ├── tracing.md
             └── workflows.md
 ```
@@ -131,6 +136,8 @@ npx skills add ./ai-engineering-skills --skill ai-engineering -g -a codex
 ## Notes
 
 - The actual skill package is the `skills/ai-engineering/` directory.
+- `skills/ai-engineering/sources.md` contains external sources grouped by page. Keep it updated when changing sourced guidance.
+- `skills/ai-engineering/evals/trigger-queries.json` is the lightweight prompt set for checking trigger precision.
 - `README.md` and `CHANGELOG.md` are for humans maintaining and adopting the repo.
 - The `skills.sh` ecosystem discovers skills from repositories containing valid `SKILL.md` files with frontmatter.
 
@@ -138,11 +145,13 @@ npx skills add ./ai-engineering-skills --skill ai-engineering -g -a codex
 
 1. Edit the files under `skills/ai-engineering/`.
 2. Validate locally with `npx skills add ./ --list`.
-3. Commit the change.
-4. Update `CHANGELOG.md`.
-5. Tag a release.
-6. Push commits and tags.
-7. Tell teammates to run `npx skills update ai-engineering`.
+3. If sourced guidance changed, update `skills/ai-engineering/sources.md`.
+4. If trigger semantics changed, update `skills/ai-engineering/evals/trigger-queries.json`.
+5. Commit the change.
+6. Update `CHANGELOG.md`.
+7. Tag a release.
+8. Push commits and tags.
+9. Tell teammates to run `npx skills update ai-engineering`.
 
 Example release flow:
 

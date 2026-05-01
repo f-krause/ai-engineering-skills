@@ -1,0 +1,146 @@
+[
+  {
+    "id": "llm_call_basic",
+    "query": "Add an OpenAI call that classifies support tickets into billing, bug, and account-access categories.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/llm-calls.md", "subskills/schema-design.md"],
+    "notes": "Direct LLM invocation plus structured output contract."
+  },
+  {
+    "id": "schema_zod_structured_output",
+    "query": "Refactor this TypeScript AI response parser to use a Zod schema with explicit enums instead of JSON.parse and regex checks.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/schema-design.md"],
+    "notes": "Structured AI output and model contract."
+  },
+  {
+    "id": "retrieval_architecture",
+    "query": "Our assistant answers questions over customer PDFs. Decide whether we need vector RAG, long context, or document-scoped search.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/retrieval.md", "subskills/citations.md"],
+    "notes": "Knowledge access and grounded answer design."
+  },
+  {
+    "id": "openai_web_search",
+    "query": "Implement current-company lookup using OpenAI Responses web_search and return cited findings in a structured object.",
+    "should_trigger": true,
+    "expected_subskills": [
+      "subskills/openai-web-search.md",
+      "subskills/schema-design.md",
+      "subskills/citations.md"
+    ],
+    "notes": "Hosted web search with citations and structured output."
+  },
+  {
+    "id": "confidence_review_routing",
+    "query": "Add confidence buckets and human-review routing for answers generated from retrieved evidence.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/confidence.md", "subskills/retrieval.md"],
+    "notes": "Confidence logic tied to grounded evidence."
+  },
+  {
+    "id": "agent_loop",
+    "query": "Build a bounded agent loop that can inspect tool results, choose the next tool, and stop after five steps.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/agents.md", "subskills/schema-design.md"],
+    "notes": "Autonomous tool loop."
+  },
+  {
+    "id": "workflow_orchestration",
+    "query": "Turn this one-shot prompt into a three-step workflow with classification, draft generation, and a verifier pass.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/workflows.md", "subskills/schema-design.md"],
+    "notes": "Code-owned AI workflow."
+  },
+  {
+    "id": "prompt_injection_eval",
+    "query": "Create eval cases for prompt injection attempts in retrieved web pages and uploaded documents.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/safety-evals.md"],
+    "notes": "AI safety and evals."
+  },
+  {
+    "id": "provider_caching",
+    "query": "We send the same long policy document to Gemini for hundreds of checks. How should we use provider-side caching?",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/llm-calls.md", "subskills/caching/gemini.md"],
+    "notes": "Repeated long-context reuse and provider caching."
+  },
+  {
+    "id": "trace_llm_workflow",
+    "query": "Add tracing around an LLM workflow so we can inspect prompts, tool calls, token usage, latency, and failures.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/tracing.md"],
+    "notes": "LLM observability."
+  },
+  {
+    "id": "negative_generic_react",
+    "query": "Fix the responsive layout bug in this React dashboard table.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Generic frontend work with no AI behavior."
+  },
+  {
+    "id": "negative_plain_api",
+    "query": "Add a REST endpoint that updates a user's billing address in Postgres.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Ordinary backend CRUD."
+  },
+  {
+    "id": "negative_csv_etl",
+    "query": "Write a Python script that reads a CSV and inserts every row into our warehouse.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Data engineering without LLM behavior."
+  },
+  {
+    "id": "negative_docs_only",
+    "query": "Update the README with install instructions and a project overview.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Project documentation only."
+  },
+  {
+    "id": "negative_auth_bug",
+    "query": "Debug why OAuth callback handling fails when the state parameter is missing.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Application auth bug without AI behavior."
+  },
+  {
+    "id": "negative_visual_design",
+    "query": "Make the landing page hero more polished and improve the typography.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Visual design request, not AI engineering."
+  },
+  {
+    "id": "near_miss_search_ui",
+    "query": "Add a search box to filter rows in this local settings table.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Contains search keyword but not AI/web/retrieval search."
+  },
+  {
+    "id": "near_miss_schema_database",
+    "query": "Create a SQL migration for a new invoices table and update the ORM schema.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Contains schema keyword but not model output schema."
+  },
+  {
+    "id": "near_miss_agent_human",
+    "query": "Assign the support ticket to the right human agent based on region.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Agent means human support representative, not autonomous AI loop."
+  },
+  {
+    "id": "near_miss_confidence_stats",
+    "query": "Calculate a confidence interval for conversion rate from this A/B test.",
+    "should_trigger": false,
+    "expected_subskills": [],
+    "notes": "Statistical confidence, not AI answer confidence or abstention."
+  }
+]

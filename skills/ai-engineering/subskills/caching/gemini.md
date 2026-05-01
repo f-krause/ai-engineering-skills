@@ -29,7 +29,6 @@ Gemini exposes two different caching models:
 - Use explicit caching when you repeatedly reuse the same large corpus, file, transcript, video, or system context and want deterministic cache reuse.
 - Track `usage_metadata` and cache object metadata instead of assuming savings.
 
-## Sources
+## Source Notes
 
-- https://ai.google.dev/gemini-api/docs/caching (last accessed 17.04.2026)
-- https://ai.google.dev/api/caching (last accessed 17.04.2026)
+Sources for this page live in `sources.md#caching-gemini`.

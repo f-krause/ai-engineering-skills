@@ -2,6 +2,22 @@
 
 Use this subskill for autonomous tool-using loops where the model dynamically decides what to do next and when to stop.
 
+## Contents
+
+- Definition: lines 21-26
+- When to Use Agents: lines 27-38
+- Agent Rules: lines 39-51
+- Planning Pattern: lines 52-66
+- Budgeting and Stop Reasons: lines 67-78
+- Tool Design Rules: lines 79-92
+- Context Management: lines 93-101
+- Multi-Agent Rule: lines 102-110
+- Code Shape: lines 111-120
+- Code Shape Examples: lines 121-168
+- TypeScript and Python: lines 169-174
+- Project Notes: lines 175-181
+- Source Notes: lines 182-184
+
 ## Definition
 
 Agents are systems where the LLM directs its own process and tool usage based on environmental feedback. An agent typically receives a goal, inspects tool results, plans the next step, decides whether to continue, and eventually terminates or asks for help.
@@ -163,14 +179,6 @@ This matches the SGR adaptive-planning pattern: replan after every observation i
 - For knowledge tools, citations, or document lookup, also read `subskills/retrieval.md`.
 - If agent orchestration changes, run the project's AI-focused regression tests if they exist.
 
-## Sources
+## Source Notes
 
-- https://www.anthropic.com/engineering/building-effective-agents (last accessed 17.04.2026)
-- https://abdullin.com/schema-guided-reasoning/adaptive-planning (last accessed 17.04.2026)
-- https://abdullin.com/schema-guided-reasoning/demo (last accessed 17.04.2026)
-- https://github.com/vamplabAI/sgr-agent-core (last accessed 17.04.2026)
-- https://ai-sdk.dev/docs/agents/building-agents (last accessed 17.04.2026)
-- https://ai-sdk.dev/docs/agents/loop-control (last accessed 17.04.2026)
-- https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/ (last accessed 19.04.2026)
-- https://www.anthropic.com/news/context-management (last accessed 19.04.2026)
-- https://developers.openai.com/api/docs/guides/agent-builder-safety (last accessed 19.04.2026)
+Sources for this page live in `sources.md#agents`.

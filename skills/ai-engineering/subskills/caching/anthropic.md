@@ -32,6 +32,6 @@ Anthropic supports prompt caching through both automatic caching and explicit ca
 - Use explicit breakpoints when tools, system prompt, and retrieved context change at different cadences.
 - Add a second breakpoint if a growing conversation will push the hot prefix beyond Anthropic's documented lookback window.
 
-## Sources
+## Source Notes
 
-- https://platform.claude.com/docs/en/build-with-claude/prompt-caching (last accessed 17.04.2026)
+Sources for this page live in `sources.md#caching-anthropic`.

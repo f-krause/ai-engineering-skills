@@ -4,6 +4,22 @@ Use this subskill when adding or changing inline citations, evidence spans, quot
 
 This subskill is about provenance after evidence has already been found. If the main issue is how to retrieve the right evidence, start with `subskills/retrieval.md`. If the main issue is how citations should affect confidence or review routing, also read `subskills/confidence.md`.
 
+## Contents
+
+- Default Architecture: lines 23-41
+- Citation Spectrum: lines 42-52
+- Core Rules: lines 53-62
+- Recommended Pattern: lines 63-89
+- Page Marker Pattern: lines 90-169
+- Geometry Guidance: lines 170-182
+- Suggested Schemas: lines 183-224
+- Matching Heuristics: lines 225-245
+- UX Guidance: lines 246-257
+- Eval Rules: lines 258-279
+- TypeScript and Python: lines 280-285
+- Project Notes: lines 286-292
+- Source Notes: lines 293-295
+
 ## Default Architecture
 
 Use a two-stage citation pipeline:
@@ -274,12 +290,6 @@ Add hard cases for:
 - For schema contracts and structured citation objects, also read `subskills/schema-design.md`.
 - For audits, failure analysis, and citation eval datasets from traces, also read `subskills/tracing.md` and `subskills/safety-evals.md`.
 
-## Sources
+## Source Notes
 
-- https://docs.anthropic.com/en/docs/build-with-claude/citations (last accessed 19.04.2026)
-- https://claude.com/blog/introducing-citations-api (last accessed 19.04.2026)
-- https://developers.openai.com/api/docs/guides/tools-file-search (last accessed 19.04.2026)
-- https://ai.google.dev/gemini-api/docs/google-search (last accessed 19.04.2026)
-- https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/GroundingMetadata (last accessed 19.04.2026)
-- https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept-model-overview?view=doc-intel-4.0.0 (last accessed 19.04.2026)
-- https://docs.aws.amazon.com/textract/latest/dg/text-location.html (last accessed 19.04.2026)
+Sources for this page live in `sources.md#citations`.
