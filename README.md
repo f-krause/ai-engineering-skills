@@ -121,6 +121,12 @@ List the skills exported by this repo:
 npx skills add ./ai-engineering-skills --list
 ```
 
+Run the trigger eval prompt set:
+
+```bash
+node ./ai-engineering-skills/skills/ai-engineering/evals/run-trigger-evals.mjs
+```
+
 Install the skill from the local folder:
 
 ```bash
@@ -147,11 +153,12 @@ npx skills add ./ai-engineering-skills --skill ai-engineering -g -a codex
 2. Validate locally with `npx skills add ./ --list`.
 3. If sourced guidance changed, update `skills/ai-engineering/sources.md`.
 4. If trigger semantics changed, update `skills/ai-engineering/evals/trigger-queries.json`.
-5. Commit the change.
-6. Update `CHANGELOG.md`.
-7. Tag a release.
-8. Push commits and tags.
-9. Tell teammates to run `npx skills update ai-engineering`.
+5. Run `node skills/ai-engineering/evals/run-trigger-evals.mjs`.
+6. Commit the change.
+7. Update `CHANGELOG.md`.
+8. Tag a release.
+9. Push commits and tags.
+10. Tell teammates to run `npx skills update ai-engineering`.
 
 Example release flow:
 

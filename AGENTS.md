@@ -35,6 +35,7 @@ Run these checks before publishing:
 
 ```bash
 npx skills add ./ --list
+node skills/ai-engineering/evals/run-trigger-evals.mjs
 wc -l skills/ai-engineering/SKILL.md skills/ai-engineering/subskills/*.md
 rg -n '^## Sources|http[s]?://' skills/ai-engineering/subskills skills/ai-engineering/SKILL.md
 ```
