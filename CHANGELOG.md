@@ -12,7 +12,7 @@ The format is intentionally simple and can be maintained by hand.
 - Split oversized schema guidance into core design, examples, and provider-support references.
 - Moved external source lists into `skills/ai-engineering/sources.md` and left compact source pointers in subskills.
 - Added `AGENTS.md` with repo maintenance rules, including source hygiene and trigger-eval guidance.
-- Added `skills/ai-engineering/evals/trigger-queries.json` with positive, negative, and near-miss trigger cases plus a dependency-free runner.
+- Added `skills/ai-engineering/evals/trigger-queries.json` with positive, negative, and near-miss trigger cases plus deterministic and Codex-backed runners.
 - Added targeted line-range hints to `SKILL.md` and retained contents sections only for subskills over 150 lines.
 
 ## [0.2.0] - 2026-04-29

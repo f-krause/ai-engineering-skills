@@ -127,6 +127,12 @@ Run the trigger eval prompt set:
 node ./ai-engineering-skills/skills/ai-engineering/evals/run-trigger-evals.mjs
 ```
 
+Run the same eval with Codex as the router:
+
+```bash
+node ./ai-engineering-skills/skills/ai-engineering/evals/run-trigger-evals.mjs --codex
+```
+
 Install the skill from the local folder:
 
 ```bash
@@ -154,11 +160,12 @@ npx skills add ./ai-engineering-skills --skill ai-engineering -g -a codex
 3. If sourced guidance changed, update `skills/ai-engineering/sources.md`.
 4. If trigger semantics changed, update `skills/ai-engineering/evals/trigger-queries.json`.
 5. Run `node skills/ai-engineering/evals/run-trigger-evals.mjs`.
-6. Commit the change.
-7. Update `CHANGELOG.md`.
-8. Tag a release.
-9. Push commits and tags.
-10. Tell teammates to run `npx skills update ai-engineering`.
+6. Run `node skills/ai-engineering/evals/run-trigger-evals.mjs --codex` when trigger semantics changed.
+7. Commit the change.
+8. Update `CHANGELOG.md`.
+9. Tag a release.
+10. Push commits and tags.
+11. Tell teammates to run `npx skills update ai-engineering`.
 
 Example release flow:
 

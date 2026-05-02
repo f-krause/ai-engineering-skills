@@ -3,8 +3,8 @@
     "id": "llm_call_basic",
     "query": "Add an OpenAI call that classifies support tickets into billing, bug, and account-access categories.",
     "should_trigger": true,
-    "expected_subskills": ["subskills/llm-calls.md", "subskills/schema-design.md"],
-    "notes": "Direct LLM invocation plus structured output contract."
+    "expected_subskills": ["subskills/llm-calls.md"],
+    "notes": "Direct LLM invocation. Schema design is optional unless the query explicitly asks for structured output."
   },
   {
     "id": "schema_zod_structured_output",
@@ -17,8 +17,8 @@
     "id": "retrieval_architecture",
     "query": "Our assistant answers questions over customer PDFs. Decide whether we need vector RAG, long context, or document-scoped search.",
     "should_trigger": true,
-    "expected_subskills": ["subskills/retrieval.md", "subskills/citations.md"],
-    "notes": "Knowledge access and grounded answer design."
+    "expected_subskills": ["subskills/retrieval.md"],
+    "notes": "Knowledge access architecture. Citation handling is optional unless exact provenance is requested."
   },
   {
     "id": "openai_web_search",
@@ -35,22 +35,22 @@
     "id": "confidence_review_routing",
     "query": "Add confidence buckets and human-review routing for answers generated from retrieved evidence.",
     "should_trigger": true,
-    "expected_subskills": ["subskills/confidence.md", "subskills/retrieval.md"],
-    "notes": "Confidence logic tied to grounded evidence."
+    "expected_subskills": ["subskills/confidence.md"],
+    "notes": "Confidence and review routing. Retrieval is optional unless evidence-finding behavior changes."
   },
   {
     "id": "agent_loop",
     "query": "Build a bounded agent loop that can inspect tool results, choose the next tool, and stop after five steps.",
     "should_trigger": true,
-    "expected_subskills": ["subskills/agents.md", "subskills/schema-design.md"],
-    "notes": "Autonomous tool loop."
+    "expected_subskills": ["subskills/agents.md"],
+    "notes": "Autonomous tool loop. Schema design is optional unless planner/tool contracts are requested."
   },
   {
     "id": "workflow_orchestration",
     "query": "Turn this one-shot prompt into a three-step workflow with classification, draft generation, and a verifier pass.",
     "should_trigger": true,
-    "expected_subskills": ["subskills/workflows.md", "subskills/schema-design.md"],
-    "notes": "Code-owned AI workflow."
+    "expected_subskills": ["subskills/workflows.md"],
+    "notes": "Code-owned AI workflow. Schema design is optional unless handoff contracts are requested."
   },
   {
     "id": "prompt_injection_eval",
@@ -63,8 +63,8 @@
     "id": "provider_caching",
     "query": "We send the same long policy document to Gemini for hundreds of checks. How should we use provider-side caching?",
     "should_trigger": true,
-    "expected_subskills": ["subskills/llm-calls.md", "subskills/caching/gemini.md"],
-    "notes": "Repeated long-context reuse and provider caching."
+    "expected_subskills": ["subskills/caching/gemini.md"],
+    "notes": "Provider-specific caching guidance. Generic LLM call guidance is optional."
   },
   {
     "id": "trace_llm_workflow",
