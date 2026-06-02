@@ -1,4 +1,4 @@
-# ai-engineering-skills
+# Personal AI Engineering Skill
 
 Portable repository for the `ai-engineering` skill of [Felix Krause](https://www.f-krause.at/), packaged for the `skills.sh` ecosystem.
 
