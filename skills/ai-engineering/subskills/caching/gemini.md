@@ -19,6 +19,7 @@ Gemini exposes two different caching models:
 ## Explicit caching
 
 - Gemini lets you create a `CachedContent` resource, then reference it from later requests.
+- `CachedContent` holds immutable `contents`, `systemInstruction`, and optionally tools. Its resource schema does not include `responseSchema`; keep the large document in `contents` and set the needed `responseSchema` on each generation request. This permits one cached document to be used with different response schemas, subject to model and API compatibility. Verify hits with `cached_content_token_count`.
 - This is a real reusable cache handle, not just prefix reuse heuristics.
 - If not set, Google documents TTL as defaulting to 1 hour.
 - Gemini exposes cache lifecycle operations to create, get, list, update, and delete cache objects.

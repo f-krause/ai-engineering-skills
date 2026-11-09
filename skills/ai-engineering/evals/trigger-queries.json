@@ -67,6 +67,20 @@
     "notes": "Provider-specific caching guidance. Generic LLM call guidance is optional."
   },
   {
+    "id": "nebius_document_caching",
+    "query": "Use Nebius Token Factory to analyze the same uploaded PDF with several JSON schemas. Check file support and cached-token behavior.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/caching/nebius.md"],
+    "notes": "Nebius inference, uploaded files, prompt caching, and schema constraints."
+  },
+  {
+    "id": "anthropic_schema_cache_order",
+    "query": "We cache a long document with Claude but change the structured output schema for each extraction. Will the document prefix still hit?",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/caching/anthropic.md"],
+    "notes": "Claude schema changes and document cache invalidation."
+  },
+  {
     "id": "trace_llm_workflow",
     "query": "Add tracing around an LLM workflow so we can inspect prompts, tool calls, token usage, latency, and failures.",
     "should_trigger": true,

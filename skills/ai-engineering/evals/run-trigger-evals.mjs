@@ -46,6 +46,17 @@ function classify(query) {
     return { should_trigger: false, subskills: [] };
   }
 
+  if (q.includes("nebius token factory") && includesAny(q, ["cache", "cached", "uploaded pdf"])) {
+    return {
+      should_trigger: true,
+      subskills: ["subskills/caching/nebius.md"],
+    };
+  }
+
+  if (q.includes("claude") && includesAny(q, ["cache", "cached"]) && q.includes("schema")) {
+    return { should_trigger: true, subskills: ["subskills/caching/anthropic.md"] };
+  }
+
   const subskills = new Set();
 
   if (
