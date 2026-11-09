@@ -1,0 +1,121 @@
+[
+  {
+    "id": "explicit_slash",
+    "query": "/ambition Make a slide deck for our quarterly business review from these sales CSVs.",
+    "should_trigger": true,
+    "expected_mode": "upgrade",
+    "notes": "Explicit invocation. Return the upgrade report before building anything."
+  },
+  {
+    "id": "explicit_prompt_upgrade",
+    "query": "Here's the prompt I use to have you analyze our churn data. How could I make it more ambitious?",
+    "should_trigger": true,
+    "expected_mode": "upgrade",
+    "notes": "User asks to upgrade their own working prompt."
+  },
+  {
+    "id": "shallow_output_complaint",
+    "query": "This competitor analysis is way too generic. Make it actually useful.",
+    "should_trigger": true,
+    "expected_mode": "lens",
+    "notes": "Shallow-output complaint. Depth fix is in scope; altitude only as an offer."
+  },
+  {
+    "id": "qbr_kickoff",
+    "query": "Put together the Q3 business review deck for leadership using the exports in ./data.",
+    "should_trigger": true,
+    "expected_mode": "lens",
+    "notes": "Decision-driving deliverable with raw data available."
+  },
+  {
+    "id": "strategy_memo",
+    "query": "Draft a memo recommending whether we should expand into the German market.",
+    "should_trigger": true,
+    "expected_mode": "lens",
+    "notes": "Open-ended decision memo."
+  },
+  {
+    "id": "recurring_task",
+    "query": "Like every week, summarize the new crash reports so I can file tickets.",
+    "should_trigger": true,
+    "expected_mode": "lens",
+    "notes": "Recurring re-request. Altitude offer: make it a durable crash-free workflow."
+  },
+  {
+    "id": "research_for_meeting",
+    "query": "Research how competitors price their API plans and write up findings for Thursday's pricing meeting.",
+    "should_trigger": true,
+    "expected_mode": "lens",
+    "notes": "Meetings signal that altitude is worth offering."
+  },
+  {
+    "id": "perf_target",
+    "query": "Get our homepage load time from 10 seconds down to 5.",
+    "should_trigger": true,
+    "expected_mode": "lens",
+    "notes": "Open optimization target. Hit 5s, measure against a stretch target, use a profiler as judge."
+  },
+  {
+    "id": "negative_bug_fix",
+    "query": "Fix the null pointer exception in UserService.getProfile when email is missing.",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "Well-scoped bug fix."
+  },
+  {
+    "id": "negative_factual",
+    "query": "What does HTTP status 409 mean?",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "Factual question."
+  },
+  {
+    "id": "negative_rewording",
+    "query": "Can you make this email sound less angry?",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "Rewording. The post uses this as the low-ambition baseline, but the user wants exactly that."
+  },
+  {
+    "id": "negative_quick_edit",
+    "query": "Quick one: rename the variable cnt to count across this file.",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "Small, time-boxed edit."
+  },
+  {
+    "id": "negative_mid_task",
+    "query": "Looks good, now also add a legend to the chart.",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "Mid-task follow-up."
+  },
+  {
+    "id": "negative_creative",
+    "query": "Write a short birthday poem for my sister. She loves cats and bad puns.",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "Creative piece where the user's vision is the point."
+  },
+  {
+    "id": "near_miss_fixed_scope_deck",
+    "query": "Update only the Q3 revenue numbers on slide 4 of the template. Don't change anything else.",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "Business-review artifact, but the user fixed the scope."
+  },
+  {
+    "id": "near_miss_ai_product_prompt",
+    "query": "Write the system prompt for our support-ticket classifier and add a Zod schema for its output.",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "A prompt inside an AI product belongs to ai-engineering, not to the user's own task framing."
+  },
+  {
+    "id": "near_miss_ambitious_word",
+    "query": "Our ambitious roadmap slipped. Move the Jira due dates two weeks later.",
+    "should_trigger": false,
+    "expected_mode": null,
+    "notes": "Contains 'ambitious' but is a mechanical update."
+  }
+]

@@ -10,6 +10,12 @@ Install the skill:
 npx skills add f-krause/ai-engineering-skills --skill ai-engineering
 ```
 
+Install the `ambition` skill, which raises the ambition of open-ended tasks and can be invoked as `/ambition <prompt>`:
+
+```bash
+npx skills add f-krause/ai-engineering-skills --skill ambition
+```
+
 Update the skill later:
 
 ```bash
@@ -23,6 +29,11 @@ ai-engineering-skills/
 ├── CHANGELOG.md
 ├── README.md
 └── skills/
+    ├── ambition/
+    │   ├── SKILL.md
+    │   ├── evals/
+    │   │   └── trigger-queries.json
+    │   └── sources.md
     └── ai-engineering/
         ├── SKILL.md
         ├── evals/

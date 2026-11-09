@@ -6,6 +6,8 @@ The format is intentionally simple and can be maintained by hand.
 
 ## [Unreleased]
 
+- Added the `ambition` skill: altitude, depth, and range lenses for open-ended tasks, with an explicit `/ambition` upgrade mode, an automatic lens mode, and a scope contract that applies depth and range by default but only offers goal, format, or effort-multiplying changes. Includes sources and trigger eval cases.
+
 ## [0.3.0] - 2026-05-01
 
 - Tightened the `ai-engineering` skill trigger with negative scope for ordinary non-AI work.
