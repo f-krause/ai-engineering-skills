@@ -15,7 +15,7 @@ This skill is the router for AI changes in any codebase using it. Keep it loaded
 
 ## Quick Fetch Map
 
-- Direct LLM calls: `subskills/llm-calls.md` direct-call fit lines 5-14; call defaults lines 16-25; rate limits, retries, and malformed-output repair lines 26-30; provider caching lines 35-66; prompt shape lines 68-77.
+- Direct LLM calls: `subskills/llm-calls.md` direct-call fit lines 5-14; call defaults lines 16-25; rate limits, retries, and malformed-output repair lines 26-30; provider caching lines 35-67; prompt shape lines 69-78.
 - Schema design: `subskills/schema-design.md` core rules lines 18-31; field ordering and routing patterns lines 32-47; minimal examples lines 48-85; tool schema rules lines 93-123; citation/confidence schema patterns lines 124-153.
 - Schema references: `subskills/schema-examples.md` Python examples lines 16-109; TypeScript examples lines 110-196; SGR parameters lines 197-211. `subskills/schema-provider-support.md` portable baseline lines 5-17; provider matrix lines 19-32; portability rules lines 34-42.
 - Retrieval and grounding: `subskills/retrieval.md` architecture choice lines 5-18; retriever rules lines 20-31; chunking lines 33-43; grounded answer design lines 45-62; retrieval evals lines 64-80.

@@ -37,7 +37,8 @@ If the task needs runtime tool selection or multiple adaptive steps, read `subsk
 Caching does not mean the same thing everywhere. The main patterns are:
 
 - Automatic prefix caching: the provider reuses computation when the beginning of the prompt is identical across requests.
-- Explicit cache objects or breakpoints: you tell the provider what to cache and then reference it later.
+- Explicit cache objects: create a reusable resource and reference its name in later requests (Gemini GenerateContent).
+- Explicit breakpoints: mark reusable prefix boundaries inside requests (for example Anthropic and newer OpenAI models); the provider matches the prefix on later requests.
 - Application-layer caching: you store full responses or preprocessed artifacts yourself. This is not provider KV or prefix caching.
 
 If many requests reuse the same long file, system prompt, tool schema, examples, or image set, design for provider cache hits before building app-level deduplication. In practice:

@@ -67,6 +67,13 @@
     "notes": "Provider-specific caching guidance. Generic LLM call guidance is optional."
   },
   {
+    "id": "gemini_enterprise_cache_retention",
+    "query": "For Gemini Enterprise Agent Platform, keep implicit cache hits in RAM without durable storage and assess the project settings needed for zero data retention.",
+    "should_trigger": true,
+    "expected_subskills": ["subskills/caching/gemini.md"],
+    "notes": "Gemini implicit storage tiers, enterprise endpoint, and retention controls."
+  },
+  {
     "id": "nebius_document_caching",
     "query": "Use Nebius Token Factory to analyze the same uploaded PDF with several JSON schemas. Check file support and cached-token behavior.",
     "should_trigger": true,

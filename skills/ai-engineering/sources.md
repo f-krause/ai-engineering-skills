@@ -142,8 +142,12 @@ Keep this file current whenever a subskill uses external guidance, provider docu
 
 ## caching-gemini
 
-- https://ai.google.dev/gemini-api/docs/generate-content/caching (last accessed 09.11.2026)
-- https://ai.google.dev/api/caching (last accessed 09.11.2026)
+- https://ai.google.dev/gemini-api/docs/caching (last accessed 10.11.2026)
+- https://ai.google.dev/gemini-api/docs/zdr (last accessed 10.11.2026)
+- https://ai.google.dev/api/caching (last accessed 10.11.2026)
+- https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/context-cache/context-cache-overview (last accessed 10.11.2026)
+- https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention (last accessed 10.11.2026)
+- https://googleapis.github.io/python-genai/genai.html (last accessed 10.11.2026)
 
 ## caching-mistral
 
