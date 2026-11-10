@@ -4,27 +4,27 @@ Use this file when the workload repeatedly sends the same long prompt prefix to 
 
 ## Model
 
-OpenAI uses automatic prompt caching on recent models, `gpt-4o` and newer. This is automatic prefix caching, not an explicit cache object API.
+OpenAI prompt caching is model-specific. GPT-5.6 and later support implicit and explicit breakpoints; older supported models use implicit caching.
 
 ## How it works
 
 - Cache hits require an exact shared prompt prefix.
-- Eligibility starts at 1024 prompt tokens.
-- After the first 1024 cached tokens, hits accrue in 128-token increments.
+- GPT-5.6 and later require a 1,024-token visible prefix. Older models have a setting-dependent minimum and report hits in 128-token increments.
+- On GPT-5.6 and later, `prompt_cache_options.mode: "explicit"` uses only marked `prompt_cache_breakpoint` boundaries. Without one, no cache is written. A request can write up to four breakpoints.
 - The provider exposes hits in `usage.prompt_tokens_details.cached_tokens`.
-- `prompt_cache_key` helps routing locality for workloads with many repeated long prefixes.
+- `prompt_cache_key` helps routing on older models. On GPT-5.6 and later it is optional for cache accounting and partitioning, not a cache handle.
 
 ## Retention
 
-- Default retention is in-memory caching.
-- OpenAI documents cached prefixes as generally active for about 5 to 10 minutes of inactivity, up to 1 hour.
-- Some supported models also allow `prompt_cache_retention: "24h"` for extended retention.
+- GPT-5.6 and later default to a 30-minute minimum lifetime; Responses can request `prompt_cache_options.ttl: "12h"`. Writes have a higher input rate, so compare write cost against later reads.
+- Earlier models use implicit caching and older `prompt_cache_retention` controls. Do not transfer one family's retention rules to another.
 
 ## What to do in practice
 
 - Put stable system instructions, examples, tool definitions, images, and schemas first.
 - Put user-specific or request-specific content last.
-- Treat caching as prompt-structure work, not as a separate cache object feature.
+- Changing top-level `text.format` can prevent reuse of a later document prefix. On supported GPT-6 and later Responses models, keep the original top-level format stable and append a `configuration_update` with the new schema before the next user message. This preserves the earlier prefix in an append-only conversation.
+- On GPT-5.6 and later, place an explicit breakpoint at the end of a reusable document block when the request shape permits. A breakpoint cannot rescue a prefix changed by earlier tools, instructions, or format settings.
 - Verify the optimization by logging `cached_tokens`.
 
 ## What this is not

@@ -11,6 +11,7 @@ Anthropic supports prompt caching through both automatic caching and explicit ca
 - Automatic caching: add one top-level `cache_control` and Anthropic advances the cache point as the conversation grows.
 - Explicit caching: place `cache_control` on individual cacheable blocks for fine-grained control.
 - Anthropic builds cacheable hierarchy in this order: `tools`, `system`, then `messages`.
+- Structured output via `output_config.format` injects an additional system prompt. Changing that format invalidates the prompt cache for the conversation thread, including a document cached later in `messages`. A separately cached compiled JSON grammar does not preserve the document's prompt cache.
 - Cache hits require exact matching of cached prompt segments, including text and images.
 - Anthropic documents up to 4 breakpoint slots.
 - Anthropic documents an automatic lookback window of about 20 content blocks before an explicit breakpoint.
@@ -30,6 +31,7 @@ Anthropic supports prompt caching through both automatic caching and explicit ca
 
 - Use top-level automatic caching when the whole conversation prefix should keep moving forward.
 - Use explicit breakpoints when tools, system prompt, and retrieved context change at different cadences.
+- If one large document needs several output schemas, keep a common schema during the cached pass and transform results afterward, or accept a cache miss for each schema. Moving the document to a user message cannot put it before top-level `system` or the structured-output format.
 - Add a second breakpoint if a growing conversation will push the hot prefix beyond Anthropic's documented lookback window.
 
 ## Source Notes

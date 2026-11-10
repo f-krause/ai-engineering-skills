@@ -15,9 +15,9 @@ This skill is the router for AI changes in any codebase using it. Keep it loaded
 
 ## Quick Fetch Map
 
-- Direct LLM calls: `subskills/llm-calls.md` direct-call fit lines 5-14; call defaults lines 16-25; rate limits, retries, and malformed-output repair lines 26-30; provider caching lines 35-64; prompt shape lines 66-75.
+- Direct LLM calls: `subskills/llm-calls.md` direct-call fit lines 5-14; call defaults lines 16-25; rate limits, retries, and malformed-output repair lines 26-30; provider caching lines 35-67; prompt shape lines 69-78.
 - Schema design: `subskills/schema-design.md` core rules lines 18-31; field ordering and routing patterns lines 32-47; minimal examples lines 48-85; tool schema rules lines 93-123; citation/confidence schema patterns lines 124-153.
-- Schema references: `subskills/schema-examples.md` Python examples lines 16-109; TypeScript examples lines 110-196; SGR parameters lines 197-211. `subskills/schema-provider-support.md` portable baseline lines 5-17; provider matrix lines 19-32; portability rules lines 34-40.
+- Schema references: `subskills/schema-examples.md` Python examples lines 16-109; TypeScript examples lines 110-196; SGR parameters lines 197-211. `subskills/schema-provider-support.md` portable baseline lines 5-17; provider matrix lines 19-32; portability rules lines 34-42.
 - Retrieval and grounding: `subskills/retrieval.md` architecture choice lines 5-18; retriever rules lines 20-31; chunking lines 33-43; grounded answer design lines 45-62; retrieval evals lines 64-80.
 - OpenAI web search: `subskills/openai-web-search.md` when to use lines 17-21; Responses API settings lines 23-33; URL annotations lines 35-46; structured-output pattern lines 48-138; claim-level citation mapping lines 140-165; source quality lines 167-173.
 - Citations and provenance: `subskills/citations.md` two-stage architecture lines 23-41 and 63-89; page markers lines 90-169; geometry lines 170-182; schemas lines 183-224; matching heuristics lines 225-245; UX/evals lines 246-279.
@@ -88,6 +88,7 @@ Provider caching references:
 - Azure OpenAI: `subskills/caching/azure-openai.md`
 - Azure Claude: `subskills/caching/azure-claude.md`
 - Azure Mistral: `subskills/caching/azure-mistral.md`
+- Nebius Token Factory: `subskills/caching/nebius.md`
 
 Shared references:
 

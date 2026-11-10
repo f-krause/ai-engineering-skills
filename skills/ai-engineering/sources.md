@@ -47,6 +47,7 @@ Keep this file current whenever a subskill uses external guidance, provider docu
 - https://platform.claude.com/docs/en/build-with-claude/structured-outputs (last accessed 01.05.2026)
 - https://docs.mistral.ai/studio-api/conversations/structured-output/custom (last accessed 01.05.2026)
 - https://docs.mistral.ai/api (last accessed 01.05.2026)
+- https://docs.tokenfactory.nebius.com/ai-models-inference/json (last accessed 09.11.2026)
 
 ## retrieval
 
@@ -130,29 +131,36 @@ Keep this file current whenever a subskill uses external guidance, provider docu
 
 ## caching-openai
 
-- https://developers.openai.com/api/docs/guides/prompt-caching (last accessed 17.04.2026)
+- https://developers.openai.com/api/docs/guides/prompt-caching (last accessed 09.11.2026)
+- https://developers.openai.com/api/docs/guides/structured-outputs (last accessed 09.11.2026)
 - https://developers.openai.com/api/reference/chat/create (last accessed 17.04.2026)
 
 ## caching-anthropic
 
-- https://platform.claude.com/docs/en/build-with-claude/prompt-caching (last accessed 17.04.2026)
+- https://platform.claude.com/docs/en/build-with-claude/prompt-caching (last accessed 09.11.2026)
+- https://platform.claude.com/docs/en/build-with-claude/structured-outputs (last accessed 09.11.2026)
 
 ## caching-gemini
 
-- https://ai.google.dev/gemini-api/docs/caching (last accessed 17.04.2026)
-- https://ai.google.dev/api/caching (last accessed 17.04.2026)
+- https://ai.google.dev/gemini-api/docs/caching (last accessed 10.11.2026)
+- https://ai.google.dev/gemini-api/docs/zdr (last accessed 10.11.2026)
+- https://ai.google.dev/api/caching (last accessed 10.11.2026)
+- https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/context-cache/context-cache-overview (last accessed 10.11.2026)
+- https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention (last accessed 10.11.2026)
+- https://googleapis.github.io/python-genai/genai.html (last accessed 10.11.2026)
 
 ## caching-mistral
 
+- https://docs.mistral.ai/inference/conversations/advanced/prompt-caching (last accessed 09.11.2026)
 - https://docs.mistral.ai/capabilities/predicted_outputs (last accessed 17.04.2026)
 - https://docs.mistral.ai/capabilities/completion/usage (last accessed 17.04.2026)
 - https://docs.mistral.ai/models/mistral-large-2-1-24-11 (last accessed 17.04.2026)
 
 ## caching-azure-openai
 
+- https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching (last accessed 09.11.2026)
 - https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching?view=foundry-classic (last accessed 17.04.2026)
 - https://learn.microsoft.com/en-gb/azure/ai-foundry/openai/how-to/prompt-caching (last accessed 17.04.2026)
-- https://learn.microsoft.com/en-us/answers/questions/5807188/does-azure-openai-support-extended-prompt-cache-re (last accessed 17.04.2026)
 
 ## caching-azure-claude
 
@@ -163,3 +171,11 @@ Keep this file current whenever a subskill uses external guidance, provider docu
 
 - https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners (last accessed 17.04.2026)
 - https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/deploy-models-mistral-codestral (last accessed 17.04.2026)
+
+## caching-nebius
+
+- https://docs.tokenfactory.nebius.com/quickstart (last accessed 09.11.2026)
+- https://docs.tokenfactory.nebius.com/cached-tokens (last accessed 09.11.2026)
+- https://docs.tokenfactory.nebius.com/ai-models-inference/json (last accessed 09.11.2026)
+- https://docs.tokenfactory.nebius.com/api-reference/files/upload-file (last accessed 09.11.2026)
+- https://docs.tokenfactory.nebius.com/api-reference/inference/create-a-response (last accessed 09.11.2026)

@@ -37,13 +37,15 @@ If the task needs runtime tool selection or multiple adaptive steps, read `subsk
 Caching does not mean the same thing everywhere. The main patterns are:
 
 - Automatic prefix caching: the provider reuses computation when the beginning of the prompt is identical across requests.
-- Explicit cache objects or breakpoints: you tell the provider what to cache and then reference it later.
+- Explicit cache objects: create a reusable resource and reference its name in later requests (Gemini GenerateContent).
+- Explicit breakpoints: mark reusable prefix boundaries inside requests (for example Anthropic and newer OpenAI models); the provider matches the prefix on later requests.
 - Application-layer caching: you store full responses or preprocessed artifacts yourself. This is not provider KV or prefix caching.
 
 If many requests reuse the same long file, system prompt, tool schema, examples, or image set, design for provider cache hits before building app-level deduplication. In practice:
 
 - Put the most stable content first and move per-request variables to the end.
 - Keep tool definitions, structured-output schemas, examples, and image settings byte-stable across requests when the provider requires exact matches.
+- Before planning to reuse one long document with different output schemas, check where each provider renders the schema. Anthropic's top-level structured-output format invalidates the later document cache; Gemini's explicit `CachedContent` can hold the document separately from a per-request response schema; newer OpenAI models offer append-only format updates. Do not infer cache reuse from a reused file ID alone.
 - When parallelizing many calls, consider cache-aware scheduling. Group or order work by shared document or shared context when that improves prefix or prompt-cache reuse at the provider.
 - Log provider-specific cache hit fields so you can confirm the optimization is real instead of assumed.
 - Warm the cache before high fan-out workflows when the provider only makes a new cache entry visible after the first request starts returning.
@@ -62,6 +64,7 @@ Read the matching caching file instead of relying on memory:
 - Azure OpenAI: `subskills/caching/azure-openai.md`
 - Azure Claude: `subskills/caching/azure-claude.md`
 - Azure Mistral: `subskills/caching/azure-mistral.md`
+- Nebius Token Factory: `subskills/caching/nebius.md`
 
 ## Prompt Shape
 
@@ -70,7 +73,7 @@ Use this structure:
 - Stable system instructions for role, constraints, and tool policy
 - User task or app event payload
 - Optional structured context block with bounded, relevant facts
-- Structured output schema or tool schema
+- Structured output or tool schema in the provider's supported request field; this list does not imply the provider's rendered token order
 
 Do not mix instructions into retrieved documents or tool results.
 

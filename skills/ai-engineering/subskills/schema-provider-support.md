@@ -6,7 +6,7 @@ Use this reference only when provider-specific structured-output behavior matter
 
 Current provider structured-output pipelines all speak JSON Schema, but not the same JSON Schema. Treat Pydantic and Zod as authoring tools, not as proof that every constraint will be enforced by the model provider.
 
-As of 2026-05-01, the portable baseline across OpenAI, Gemini, Claude, and Mistral is:
+As of 2026-11-09, the portable baseline across OpenAI, Gemini, Claude, and Mistral is:
 
 - object, array, string, integer, number, boolean, and null-compatible fields
 - `properties`, `required`, `items`, concise `description`, and `additionalProperties: false`
@@ -38,6 +38,8 @@ Use provider-specific constraints only when the provider and target model explic
 3. If the schema is Claude-only, expect SDK helpers to simplify unsupported constraints before sending the schema. Use Pydantic/Zod validation after `parse()` for the real guarantee.
 4. If the schema is Mistral-only, use custom structured outputs with `type: "json_schema"`, but run a small conformance eval for constraints beyond basic type, required, enum, and object shape.
 5. Keep provider test fixtures for every schema that relies on anything beyond the portable baseline.
+
+Nebius Token Factory offers `json_schema` and `json_object` response formats on supported models. Its compatibility with the OpenAI SDK does not imply identical schema keyword enforcement or cache behavior; test the selected model and validate locally. See `subskills/caching/nebius.md` for document and file handling.
 
 ## Source Notes
 
